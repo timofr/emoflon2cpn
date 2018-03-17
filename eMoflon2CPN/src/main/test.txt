@@ -1,0 +1,4 @@
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI">
+  <eClassifiers xsi:type="ecore:EClass" name="TestClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TestClass">test hallo 123</eClassifiers>
+</ecore:EPackage>

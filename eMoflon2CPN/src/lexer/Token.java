@@ -1,27 +1,42 @@
 package lexer;
 
+/**
+ * Token of a specific token type with a content.
+ * 
+ * @author Timo Freitag
+ *
+ */
 public class Token {
-
-	//Identifier: names of variables and functions
-	//Keywords: while, for, if, else, return, int, char
-	//Separators: ; , ( ) { }
-	//Operators: + - * / = < > 
-	//Literal 0 1 2 3 4 5 6 7 8 9 -
-	
-	private String content;
 	private TokenType type;
-	
-	public Token(String content, TokenType type) {
+	private String content;
+
+	/**
+	 * Constructs a Token.
+	 * 
+	 * @param type type of the token
+	 * @param content content of the token
+	 */
+	public Token(TokenType type, String content) {
 		this.content = content;
 		this.type = type;
 	}
 	
-	public String getContent() {
-		return this.content;
-	}
-	
+	/**
+	 * Returns the type of the token
+	 * 
+	 * @return type
+	 */
 	public TokenType getType() {
 		return this.type;
+	}
+	
+	/**
+	 * Returns the content of the Token
+	 * 
+	 * @return content
+	 */
+	public String getContent() {
+		return this.content;
 	}
 
 	@Override
