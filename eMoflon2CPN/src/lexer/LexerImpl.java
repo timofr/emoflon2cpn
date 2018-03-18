@@ -67,7 +67,7 @@ public class LexerImpl implements Lexer {
 
 			for (Matcher matcher : tokenMap.keySet()) {	
 				if (matcher.match(currentChar)) {
-					Token tokenToAdd = tokenMap.get(matcher).getToken("");
+					Token tokenToAdd = tokenMap.get(matcher).getToken(null);
 					if (tokenToAdd != null)
 						tokens.add(tokenToAdd);
 					illegalCharFound = false;
@@ -94,60 +94,62 @@ public class LexerImpl implements Lexer {
 		tokenMap.put(quotationMatcher, this::handleString);
 	}
 
-	private Token handleWhitespace(String str) {
+	private Token handleWhitespace(StringBuilder builder) {
 		getNextChar();
 		return null;
 	}
 	
-	private Token handleSlash(String str) {
+	private Token handleSlash(StringBuilder builder) {
 		return new Token(TokenType.SLASHTOKEN, Character.toString(getCurrentCharAndGoOn()));
 	}
 	
-	private Token handleOpenAngleBracket(String str) {
+	private Token handleOpenAngleBracket(StringBuilder builder) {
 		lastBracketSeen = true;
 		return new Token( TokenType.OPENANGLEBRACKETTOKEN, Character.toString(getCurrentCharAndGoOn()));
 	}
 	
-	private Token handleCloseAngleBracket(String str) {
+	private Token handleCloseAngleBracket(StringBuilder builder) {
 		lastBracketSeen = false;
 		return new Token(TokenType.CLOSEANGLEBRACKETTOKEN, Character.toString(getCurrentCharAndGoOn()));
 	}
 	
-	private Token handleEqual(String str) {
+	private Token handleEqual(StringBuilder builder) {
 		return new Token(TokenType.EQUALTOKEN, Character.toString(getCurrentCharAndGoOn()));
 	}
 	
-	private Token handleIdentifier(String str) {
+	private Token handleIdentifier(StringBuilder builder) {
+		if(builder == null) builder = new StringBuilder();
 		if(identifierMatcher.match(currentChar))
-			return handleIdentifier(str + "" + getCurrentCharAndGoOn());
+			return handleIdentifier(builder.append(getCurrentCharAndGoOn()));
 		
-		return new Token(TokenType.IDENTIFIERTOKEN, str);
+		return new Token(TokenType.IDENTIFIERTOKEN, builder.toString());
 	}
 	
-	private Token handleString(String str) throws LexerException {
+	private Token handleString(StringBuilder builder) throws LexerException {
 		if(currentChar == EOF) throw new LexerException("String was not closed.");
+		if(builder == null) builder = new StringBuilder();
 		
-		if(!quotationMatcher.match(currentChar) || str.length() == 0)
-			return handleString(str + getCurrentCharAndGoOn());
+		if(!quotationMatcher.match(currentChar) || builder.length() == 0)
+			return handleString(builder.append(getCurrentCharAndGoOn()));
 		
 		getNextChar();
-		return new Token(TokenType.STRINGTOKEN, str.substring(1));
+		return new Token(TokenType.STRINGTOKEN, builder.substring(1));
 	}
 	
 	private boolean contentMatcher(char charToMatch) {
 		return !lastBracketSeen && !openAngleBracketMatcher.match(currentChar) && !whitespaceMatcher.match(currentChar);
 	}
 	
-	private Token handleContent(String str) throws LexerException {
-		StringBuilder content = new StringBuilder();
-		while(!openAngleBracketMatcher.match(currentChar)) {
-			content.append(currentChar);
+	private Token handleContent(StringBuilder builder) throws LexerException {
+		if(builder == null) builder = new StringBuilder();
+		while(!openAngleBracketMatcher.match(currentChar) && currentChar!= EOF) {
+			builder.append(currentChar);
 			getNextChar();
 		}
-		return new Token(TokenType.CONTENTTOKEN, content.toString());
+		return new Token(TokenType.CONTENTTOKEN, builder.toString());
 	}
 	
 	private interface TokenGetter {
-		public <T extends CharSequence> Token getToken(T str) throws LexerException;
+		public Token getToken(StringBuilder builder) throws LexerException;
 	}
 }
