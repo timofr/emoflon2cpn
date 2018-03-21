@@ -3,8 +3,6 @@
  */
 package main;
 
-import parser.XmlNode;
-
 /**
  * Provides an interface for a code generator for xml-files.
  * 

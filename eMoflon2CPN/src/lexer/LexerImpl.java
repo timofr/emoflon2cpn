@@ -141,9 +141,15 @@ public class LexerImpl implements Lexer {
 	}
 	
 	private Token handleContent(StringBuilder builder) throws LexerException {
+		boolean lastWhiteSpace = false;
 		if(builder == null) builder = new StringBuilder();
-		while(!openAngleBracketMatcher.match(currentChar) && currentChar!= EOF) {
-			builder.append(currentChar);
+		while(!openAngleBracketMatcher.match(currentChar) &&  currentChar!= EOF) {
+			if(whitespaceMatcher.match(currentChar)) {
+				if(!lastWhiteSpace) builder.append(currentChar); 					
+				lastWhiteSpace = true;
+			} else {
+				builder.append(currentChar); 
+			}
 			getNextChar();
 		}
 		return new Token(TokenType.CONTENTTOKEN, builder.toString());

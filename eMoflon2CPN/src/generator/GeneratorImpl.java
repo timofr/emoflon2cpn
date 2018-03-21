@@ -33,7 +33,7 @@ public class GeneratorImpl implements Generator {
 	
 	private void xmlNodeIntoStringBuilder(XmlNode node, StringBuilder contentBuilder, StringBuilder tabBuilder, int tabCount) {
 		String tabs = tabBuilder.toString();
-		tabs = tabs.length() >> 1 <= tabCount ? tabs : tabs.substring(0, tabCount);
+		tabs = tabs.length() <= tabCount ? tabs : tabs.substring(0, tabCount);
 		contentBuilder.append(tabs);
 		contentBuilder.append('<');
 		contentBuilder.append(node.getIdentifier());
@@ -47,16 +47,20 @@ public class GeneratorImpl implements Generator {
 			contentBuilder.append('>');
 			if(node.getContent() != null) {
 				contentBuilder.append(node.getContent());
+			}
+			if (tabs.length() <= tabCount)
+				tabBuilder.append("  ");
+			node.getChildren().forEach(
+					child -> xmlNodeIntoStringBuilder(child, contentBuilder.append("\n"), tabBuilder, tabCount + 2));
+
+			if(node.getChildren().isEmpty()) {
+				contentBuilder.append('<').append('/').append(node.getIdentifier()).append(">");
 			} else {
-				if(tabs.length() >> 1 <= tabCount) tabBuilder.append("  ");
-				node.getChildren().forEach(child ->
-					xmlNodeIntoStringBuilder(child, contentBuilder.append("\n"), tabBuilder, tabCount + 1));
-				
 				contentBuilder.append('\n');
 				contentBuilder.append(tabs);
+				contentBuilder.append('<').append('/').append(node.getIdentifier()).append(">");
 			}
-			contentBuilder.append('<').append('/').append(node.getIdentifier()).append(">");
+			
 		}
 	}
-	
 }

@@ -1,9 +1,7 @@
 package parser;
 
-import java.util.Arrays;
 import java.util.List;
 
-import lexer.LexerImpl;
 import lexer.Token;
 import lexer.TokenType;
 import main.Parser;
@@ -64,15 +62,15 @@ public class ParserImpl implements Parser {
 		if(getLookAheadToken(1).getType() == TokenType.CONTENTTOKEN) {
 			getNextToken();
 			node.setContent(currentToken.getContent());
-			checkNextTokenType(TokenType.OPENANGLEBRACKETTOKEN);
-			checkNextTokenType(TokenType.SLASHTOKEN);
-		} else {
-			XmlNode child = null;
-			do {
-				child = handleNode();
-			} while(node.addChild(child));
 		}
 		
+		XmlNode child = null;
+		do {
+			child = handleNode();
+		} while (node.addChild(child));
+		
+//		checkNextTokenType(TokenType.OPENANGLEBRACKETTOKEN);
+//		checkNextTokenType(TokenType.SLASHTOKEN);
 		checkNextToken(TokenType.IDENTIFIERTOKEN, node.getIdentifier());
 		checkNextTokenType(TokenType.CLOSEANGLEBRACKETTOKEN);
 		

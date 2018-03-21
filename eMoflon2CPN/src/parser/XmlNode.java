@@ -3,6 +3,7 @@ package parser;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -26,34 +27,22 @@ public class XmlNode extends Object {
 	 * @param identifier identifier of the node
 	 */
 	public XmlNode(String identifier) {
-		this(identifier, (List<XmlNode>) null, null);
+		this(identifier, null, null, null);
 	}
-	
+
+
 	/**
-	 * Constructs a xml node with an identifier, content and properties.
-	 * Thus it got no children.
+	 * Constructs a xml node with an identifier, content, children and properties.
 	 * 
 	 * @param identifier identifier of the node
 	 * @param content content of the node
 	 * @param properties properties of the node
 	 */
-	public XmlNode(String identifier, String content, Map<String, String> properties) {
-		this(identifier, (List<XmlNode>) null, properties);
-		this.content = content;
-	}
-
-	/**
-	 * Constructs a xml node with an identifier, children and properties.
-	 * Thus it got no content.
-	 * 
-	 * @param identifier identifier of the node
-	 * @param children children of the node
-	 * @param properties properties of the node
-	 */
-	public XmlNode(String identifier, List<XmlNode> children, Map<String, String> properties) {
+	public XmlNode(String identifier, String content, List<XmlNode> children, Map<String, String> properties) {
 		this.identifier = identifier;
+		this.content = content;
 		this.children = children != null ? children : new ArrayList<XmlNode>();
-		this.properties = properties != null ? properties : new HashMap<String, String>();
+		this.properties = properties != null ? properties : new LinkedHashMap<String, String>();
 	}
 	
 	/**
@@ -112,6 +101,16 @@ public class XmlNode extends Object {
 	 */
 	public Map<String, String> getProperties() {
 		return properties;
+	}
+	
+	/**
+	 * Returns the value of a given property
+	 * 
+	 * @param name name of the property
+	 * @return value of the property
+	 */
+	public String getProperty(String name) {
+		return properties.get(name);
 	}
 
 	@Override

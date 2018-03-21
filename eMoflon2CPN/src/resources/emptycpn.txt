@@ -1,6 +1,3 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE workspaceElements PUBLIC "-//CPN//DTD CPNXML 1.0//EN" "http://cpntools.org/DTD/6/cpn.dtd">
-
 <workspaceElements>
   <generator tool="CPN Tools"
              version="4.0.1"
@@ -55,14 +52,6 @@
         </color>
       </block>
     </globbox>
-    <page id="ID6">
-      <pageattr name="New Page"/>
-      <constraints/>
-    </page>
-    <instances>
-      <instance id="ID2149"
-                page="ID6"/>
-    </instances>
     <options>
       <option name="realtimestamp">
         <value>

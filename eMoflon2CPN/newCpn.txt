@@ -1,0 +1,119 @@
+<page id="ID1521593714">
+  <pageattr name="operation"/>
+  <place id="ID1521593722">
+    <posattr x="100.0" y="0.0"/>
+    <fillattr colour="White" pattern="Solid" filled="false"/>
+    <lineattr colour="Black" thick="0" type="Solid"/>
+    <textattr colour="Black" bold="false"/>
+    <text>StartNode2firstNode</text>
+    <ellipse w="60.0" h="40.0"/>
+    <token x="10.0" y="0.0"/>
+    <marking x="0.0" y="0.0" hidden="false"/>
+    <type id="ID1521593720">
+      <posattr x="139.0" y="-23.0"/>
+      <fillattr colour="White" pattern="Solid" filled="false"/>
+      <lineattr colour="Black" thick="0" type="Solid"/>
+      <textattr colour="Black" bold="false"/>
+      <text>UNIT</text>
+    </type>
+    <initmark id="ID1521593721">
+      <posattr x="156.0" y="24.0"/>
+      <fillattr colour="White" pattern="Solid" filled="false"/>
+      <lineattr colour="Black" thick="0" type="Solid"/>
+      <textattr colour="Black" bold="false"/>
+      <text/>
+    </initmark>
+  </place>
+  <place id="ID1521593727">
+    <posattr x="200.0" y="0.0"/>
+    <fillattr colour="White" pattern="Solid" filled="false"/>
+    <lineattr colour="Black" thick="0" type="Solid"/>
+    <textattr colour="Black" bold="false"/>
+    <text>firstNode2StopNode</text>
+    <ellipse w="60.0" h="40.0"/>
+    <token x="10.0" y="0.0"/>
+    <marking x="0.0" y="0.0" hidden="false"/>
+    <type id="ID1521593725">
+      <posattr x="239.0" y="-23.0"/>
+      <fillattr colour="White" pattern="Solid" filled="false"/>
+      <lineattr colour="Black" thick="0" type="Solid"/>
+      <textattr colour="Black" bold="false"/>
+      <text>UNIT</text>
+    </type>
+    <initmark id="ID1521593726">
+      <posattr x="256.0" y="24.0"/>
+      <fillattr colour="White" pattern="Solid" filled="false"/>
+      <lineattr colour="Black" thick="0" type="Solid"/>
+      <textattr colour="Black" bold="false"/>
+      <text/>
+    </initmark>
+  </place>
+  <trans id="ID1521593719" explicit="false">
+    <posattr x="0.0" y="0.0"/>
+    <fillattr colour="White" pattern="Solid" filled="false"/>
+    <lineattr colour="Black" thick="0" type="Solid"/>
+    <textattr colour="Black" bold="false"/>
+    <text>firstNode</text>
+    <box w="60.0" h="40.0"/>
+    <binding x="7.2" y="-3.0"/>
+    <cond id="ID1521593715">
+      <posattr x="-39.0" y="31.0"/>
+      <fillattr colour="White" pattern="Solid" filled="false"/>
+      <lineattr colour="Black" thick="0" type="Solid"/>
+      <textattr colour="Black" bold="false"/>
+      <text/>
+    </cond>
+    <time id="ID1521593716">
+      <posattr x="44.5" y="31.0"/>
+      <fillattr colour="White" pattern="Solid" filled="false"/>
+      <lineattr colour="Black" thick="0" type="Solid"/>
+      <textattr colour="Black" bold="false"/>
+      <text/>
+    </time>
+    <code id="ID1521593717">
+      <posattr x="64.5" y="-52.0"/>
+      <fillattr colour="White" pattern="Solid" filled="false"/>
+      <lineattr colour="Black" thick="0" type="Solid"/>
+      <textattr colour="Black" bold="false"/>
+      <text/>
+    </code>
+    <priority id="ID1521593718">
+      <posattr x="-68.0" y="-31.0"/>
+      <fillattr colour="White" pattern="Solid" filled="false"/>
+      <lineattr colour="Black" thick="0" type="Solid"/>
+      <textattr colour="Black" bold="false"/>
+      <text/>
+    </priority>
+  </trans>
+  <arc id="ID1521593724" orientation="PtoT" order="1">
+    <posattr x="0.0" y="0.0"/>
+    <fillattr colour="White" pattern="" filled="false"/>
+    <lineattr colour="Black" thick="1" type="Solid"/>
+    <textattr colour="Black" bold="false"/>
+    <transend idref="ID1521593719"/>
+    <placeend idref="ID1521593722"/>
+    <annot id="ID1521593723">
+      <posattr x="100.0" y="0.0"/>
+      <fillattr colour="White" pattern="Solid" filled="false"/>
+      <lineattr colour="Black" thick="0" type="Solid"/>
+      <textattr colour="Black" bold="false"/>
+      <text>1`()</text>
+    </annot>
+  </arc>
+  <arc id="ID1521593729" orientation="TtoP" order="1">
+    <posattr x="0.0" y="0.0"/>
+    <fillattr colour="White" pattern="" filled="false"/>
+    <lineattr colour="Black" thick="1" type="Solid"/>
+    <textattr colour="Black" bold="false"/>
+    <transend idref="ID1521593719"/>
+    <placeend idref="ID1521593727"/>
+    <annot id="ID1521593728">
+      <posattr x="0.0" y="0.0"/>
+      <fillattr colour="White" pattern="Solid" filled="false"/>
+      <lineattr colour="Black" thick="0" type="Solid"/>
+      <textattr colour="Black" bold="false"/>
+      <text>1`()</text>
+    </annot>
+  </arc>
+  <constraints/>
+</page>
