@@ -23,7 +23,7 @@ public class main {
 	public static void main(String[] args) throws FileNotFoundException, IOException, LexerException, ParserException, ChooserException, MapperException {
 		IOHandler ioHandler = new IOHandler();
 		
-		String path = "src/resources/emoflon2.txt";
+		String path = "src/resources/emoflon.txt";
 		String input;
 		try(Scanner scanner = new Scanner(new FileInputStream(path)).useDelimiter("\\A")) {     
 			input = scanner.hasNext() ? scanner.next() : "";

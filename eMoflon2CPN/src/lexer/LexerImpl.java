@@ -8,7 +8,6 @@ import main.Lexer;
 
 public class LexerImpl implements Lexer {
 
-	// TODO refactor methods with string builder
 	private String text;
 	private char currentChar;
 	private int currentPosition = -1;
