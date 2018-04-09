@@ -35,6 +35,15 @@ public class LexerImpl implements Lexer {
 		currentChar = text.charAt(++currentPosition);
 		return currentChar;
 	}
+	
+	private char getLookaheadChar(int n) throws LexerException {
+		if(currentPosition + n < text.length() && 0 <= currentPosition + n)
+			currentChar = text.charAt(currentPosition + n);
+		else 
+			throw new LexerException("Illegal lookahead: " + currentChar + "(" + currentPosition + ") + " + n);
+		return currentChar;
+	}
+
 
 	private char getCurrentCharAndGoOn() {
 		char tempChar = text.charAt(currentPosition);
@@ -102,7 +111,14 @@ public class LexerImpl implements Lexer {
 		return new Token(TokenType.SLASHTOKEN, Character.toString(getCurrentCharAndGoOn()));
 	}
 	
-	private Token handleOpenAngleBracket(StringBuilder builder) {
+	private Token handleOpenAngleBracket(StringBuilder builder) throws LexerException {
+		char lookahead = getLookaheadChar(1);
+		if(lookahead == '!'|| lookahead == '?') {
+			getNextChar();
+			while(!closeAngleBracketMatcher.match(currentChar) &&  currentChar!= EOF) {
+				getNextChar();
+			}
+		}
 		lastBracketSeen = true;
 		return new Token( TokenType.OPENANGLEBRACKETTOKEN, Character.toString(getCurrentCharAndGoOn()));
 	}
@@ -147,7 +163,8 @@ public class LexerImpl implements Lexer {
 				if(!lastWhiteSpace) builder.append(currentChar); 					
 				lastWhiteSpace = true;
 			} else {
-				builder.append(currentChar); 
+				builder.append(currentChar);
+				lastWhiteSpace = false;
 			}
 			getNextChar();
 		}

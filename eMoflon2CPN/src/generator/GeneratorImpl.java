@@ -14,19 +14,14 @@ public class GeneratorImpl implements Generator {
 	public String generateCode()  {
 		if (code == null)
 			code = startGenerate();
-		
-//		try {
-//			
-//		} catch(GeneratorException e) {
-//			e.printStackTrace();
-//			throw new GeneratorException("Lexer couldn't lex your code"); TODO refactor this shit
-//		}
 		return code;
 	}
 	
 	private String startGenerate() {
 		StringBuilder contentBuilder = new StringBuilder();
 		StringBuilder tabBuilder = new StringBuilder();
+		contentBuilder.append("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n");
+		contentBuilder.append("<!DOCTYPE workspaceElements PUBLIC \"-//CPN//DTD CPNXML 1.0//EN\" \"http://www.daimi.au.dk/~cpntools/bin/DTD/5/cpn.dtd\">\n\n");
 		xmlNodeIntoStringBuilder(tree, contentBuilder, tabBuilder, 0);
 		return contentBuilder.toString();
 	}

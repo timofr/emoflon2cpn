@@ -14,11 +14,11 @@ import java.util.Scanner;
 
 
 public class IOHandler {
-	public void write(File file, String content) throws IOException {
+	public static void write(File file, String content) throws IOException {
 		Files.write(file.toPath(), content.getBytes(StandardCharsets.ISO_8859_1));
 	}
 	
-	public String read(File file) throws IOException {
+	public static String read(File file) throws IOException {
 		return new String(Files.readAllBytes(file.toPath()));
 	}
 	
