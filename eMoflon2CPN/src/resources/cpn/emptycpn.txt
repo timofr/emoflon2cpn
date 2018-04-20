@@ -51,6 +51,16 @@
           <string/>
         </color>
       </block>
+      <ml id="ID1412369775">fun send(msg) =
+ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)
+        <layout>fun send(msg) =
+ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
+      </ml>
+      <ml id="ID1412344054">fun receive() = 
+ ConnManagementLayer.receive(&quot;Emoflon2Cpn&quot;, stringDecode) = &quot;true&quot;
+        <layout>fun receive() = 
+ ConnManagementLayer.receive(&quot;Emoflon2Cpn&quot;, stringDecode) = &quot;true&quot;</layout>
+      </ml>
     </globbox>
     <options>
       <option name="realtimestamp">
