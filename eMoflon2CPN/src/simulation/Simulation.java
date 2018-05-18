@@ -3,157 +3,98 @@
  */
 package simulation;
 
+import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.net.URLClassLoader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
+import java.util.Comparator;
+
+import translation.Chooser;
+import translation.Translation;
+import translation.TranslationException;
+import translation.mapper.EmoflonAddressInterpreter;
+import translation.mapper.methodConstructor.EmoflonMethod;
+import translation.mapper.methodConstructor.MethodWrapper;
+import translation.mapper.methodConstructor.ObjectWrapper;
+import translation.parser.XmlNode;
+
 /**
  * @author Timo Freitag
  *
  */
-public class Simulation<T> {
-	/*
-	private ResourceSet resSet;
-	private T object;
-	private Resource resource;
-
-	public Simulation() {
-		resSet = new ResourceSetImpl();
-		resSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
-				.put(ResourceFactoryRegistryImpl.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
-	}
-
-	public void loadXMI(String path) {
-		WSN_LanguagePackage.eINSTANCE.getClass();
-
-		File file = new File(path);
-		//
-		// if (!file.exists()) {
-		// file = new File("instances/WSNSample.xmi");
-		// }
-		//
-
-		resource = resSet.createResource(URI.createFileURI(file.getAbsolutePath()));
-
-		try {
-			resource.load(null);
-			EObject loadedObject = resource.getContents().get(0);
-			wsn = (WirelessSensorNetwork) loadedObject;
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public WirelessSensorNetwork getWsn() {
-		return wsn;
-	}
-
-	public void save() {
-		try {
-			resource.save(null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	*/
+public class Simulation {
+	private String projectName;
+	private Object object;
+	private Map<String, Object> objects = new HashMap<String, Object>();
+	private Map<String, EmoflonMethod> methods;
+	private XmiReader reader;
+	private File xmiFile;
 	
-	/*
-		private LeitnersBoxView view;
-
-	private ResourceSet resSet;
-
-   private Box box;
-
-   Resource resource;
-
-   public LeitnersBoxController()
-   {
-		resSet = new ResourceSetImpl();
-		resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(ResourceFactoryRegistryImpl.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
-				
-		// initialize the LearningBoxLanguage
-		LearningBoxLanguagePackage.eINSTANCE.getClass();
+	public void initialize() throws ClassNotFoundException, SimulationException {
+		Translation translation = Translation.getTranslation();
+		projectName = translation.getProjectName();
+		reader = new XmiReader(translation.getClassLoader());
+		reader.initialize(projectName);
+		Chooser chooser = translation.getChooser();
+		System.out.println(chooser.getXmiFiles(translation.getDirectoryHandler().getXmi()));
+		xmiFile = chooser.chooseXmiFile();
+		object = reader.load(xmiFile);
+		objects.put("_this", object);
+		methods = Translation.getTranslation().getMapper().getMethods();
 	}
-
-	public void setView(LeitnersBoxView view) {
-		this.view = view;
-	}
-
-   private String partitionToString(Partition partition)
-   {
-      if (partition == null)
-         return "";
-      return "Partition " + partition.getIndex();
-   }
-
-   public void loadXmiFile()
-   {
-      // TODO: Change this statement if you did not persist your instance file in 'instances'
-      File file = new File("instances/Box.xmi");
-	  if(!file.exists()){
-		  file = new File("instances/BoxSample.xmi");
-	  }
-      resource = resSet.createResource(URI.createFileURI(file.getAbsolutePath()));
-
-      try
-      {
-         resource.load(null);
-         EObject loadedObject = resource.getContents().get(0);
-         box = (Box) loadedObject;
-
-         // Read instance file and generate all partitions + cards
-         createPartitions(box);
-				
-      } catch (IOException e)
-      {
-				e.printStackTrace();
+	
+	
+	
+	public boolean invoke(String name) throws SimulationException {
+		try {
+			EmoflonMethod emoflonMethod = methods.get(name);
+			MethodWrapper blackMethod = emoflonMethod.getBlackMethod();
+			MethodWrapper greenMethod = emoflonMethod.getGreenMethod();
+			MethodWrapper redMethod = emoflonMethod.getRedMethod();
+			
+			if(!invokeColour(blackMethod)) return false;
+			if(!invokeColour(redMethod)) return false;
+			for(String objectToDelete : emoflonMethod.getObjectsToDelete()) {
+				EcoreUtil.delete((EObject) objects.get(objectToDelete));
+				objects.remove(objectToDelete);
 			}
-	}
-
-   public void createPartitions(Box box)
-   {
-      int partitionIndex = 0;
-      for (Partition part : box.getContainedPartition())
-      {
-         view.createPartition(partitionToString(part));
-         createCardsForPartition(part, partitionIndex++);
-      }
-   }
-
-   private void createCardsForPartition(Partition partition, int partIndex)
-   {
-      int cardIndex = 0;
-      for (Card card : partition.getCard())
-      {
-         view.createCard(partitionToString(partition), card.getBack(), partIndex, cardIndex++);
+			if(!invokeColour(greenMethod)) return false;
+			
+			return true;
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+			throw new SimulationException("Invocation of method " + name + " crashed. " + e.getClass().getName() + ": " + e.getMessage());
 		}
 	}
-
-   public void doActionRemoveCard(int partIndex, int cardIndex)
-   {
-      // 'Grab' cards selected in the JFrame
-      Partition containerPartion = box.getContainedPartition().get(partIndex);
-      Card toBeRemoved = box.getContainedPartition().get(partIndex).getCard().get(cardIndex);
-
-      // Part II; User function implemented with injections
-      containerPartion.removeCard(toBeRemoved);
-
-      // Save box.xmi instance and refresh GUI
-      view.refreshGUI();
-   }
-
-   public void doActionCheckCard(int partIndex, int cardIndex)
-   {
-      // Grab specific card selected in JFrame
-      Partition containerPartition = box.getContainedPartition().get(partIndex);
-      Card cardToBeChecked = box.getContainedPartition().get(partIndex).getCard().get(cardIndex);
-
-      // Prompt user for guess against card
-      String guess = view.getUserGuess();
-      System.out.println("Your guess: " + guess);
-
-      // TODO: Part III; User function implemented with SDMs. Uncomment the statement below to activate
-      containerPartition.check(cardToBeChecked, guess);
-
-      // Save box.xmi instance and refresh GUI
-      view.refreshGUI();
-   }
-	 */
+	
+	public boolean invokeColour(MethodWrapper method) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		if(method.getMethod() == null) return true;
+		int i = 0;
+		Object[] args = new Object[method.getInput().size()];
+		for(ObjectWrapper arg : method.getInput()) {
+			args[i++] = objects.get(arg.getName());
+		}
+		
+		Object[] returnObjects = (Object[]) method.getMethod().invoke(null, args);
+		if(returnObjects == null) return false;
+		
+		i = 0;
+		for(String returnObject : method.getOutput()) {
+			objects.put(returnObject, returnObjects[i++]);
+		}
+		return true;
+	}
+	
+	
 }

@@ -12,6 +12,7 @@ import java.util.function.BooleanSupplier;
 import javacpn.EncodeDecode;
 import javacpn.JavaCPN;
 import javacpn.JavaCPNInterface;
+import translation.Translation;
 
 /**
  * @author Timo Freitag
@@ -21,12 +22,15 @@ public class Server {
 	private int port;
 	private Map<String, BooleanSupplier> functions = new HashMap<String, BooleanSupplier>();
 	private JavaCPNInterface cpn = new JavaCPN();
+	private String path;
+	private Simulation simulation = new Simulation();
 	
 	public Server(int port) {
 		this.port = port;
 	}
 	
-	public void communicate() throws IOException {
+	public void communicate() throws IOException, ClassNotFoundException, SimulationException {
+		simulation.initialize();
 		cpn.connect("localhost", port);
 		System.out.println("Connected");
 		polling();
@@ -39,18 +43,21 @@ public class Server {
 		try {
 			while(!finished) {
 				String msg = EncodeDecode.decodeString(cpn.receive());
-				//boolean result = functions.get(msg).getAsBoolean();
-				//cpn.send(EncodeDecode.encode(Boolean.toString(result)));
 				System.out.println(msg);
-				boolean flag = false;
-				if(msg.equals("find"))
-					cpn.send(EncodeDecode.encode(Boolean.toString(flag)));
-				else
-					cpn.send(EncodeDecode.encode(Boolean.toString(true)));
+				boolean result = false;
+				try {
+					result = simulation.invoke(msg);
+				} catch (SimulationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				cpn.send(EncodeDecode.encode(Boolean.toString(result)));
 			}
 		}
 		catch(IOException e) {
 			e.printStackTrace();
 		}
 	}
+	
+	
 }

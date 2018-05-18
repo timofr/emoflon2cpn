@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE workspaceElements PUBLIC "-//CPN//DTD CPNXML 1.0//EN" "http://www.daimi.au.dk/~cpntools/bin/DTD/5/cpn.dtd">
-
-<eClassifiers xsi:type="ecore:EClass" name="TestClass">
-  <eOperations xsi:type="activities:MoflonEOperation" name="operation">test123
-    <activity owningOperation="//TestClass/operation"/>
-  </eOperations>
-  <eOperations xsi:type="activities:MoflonEOperation" name="statement"/>
-</eClassifiers>

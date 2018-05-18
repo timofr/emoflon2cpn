@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmoflonExampleCode:Container
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:EmoflonExampleCode="platform:/plugin/EmoflonExampleCode/model/EmoflonExampleCode.ecore"
+    xsi:schemaLocation="platform:/plugin/EmoflonExampleCode/model/EmoflonExampleCode.ecore ../model/EmoflonExampleCode.ecore">
+  <markers/>
+</EmoflonExampleCode:Container>

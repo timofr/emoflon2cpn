@@ -52,9 +52,14 @@ public class XmlNodeFactory {
 		return new Coordinates(x, y);
 	}
 	
+	
 	public static XmlNodeFactory getFactory() {
 		if(factory == null) factory = new XmlNodeFactory();
 		return factory;
+	}
+	
+	public void resetFactory() {
+		placeCounter = placeRow = transCounter = transRow = 0;
 	}
 	
 	private long startNumber = System.currentTimeMillis() / 1000;
@@ -280,8 +285,7 @@ public class XmlNodeFactory {
 		return new XmlNode("annot", null, children, properties);
 	}
 	
-	public XmlNode arc(String orientation, int order, String transend, String placeend, XmlNode start, XmlNode end, String annotation) {
-		if(start == null || end == null) System.out.println("shit"); 
+	public XmlNode arc(String orientation, int order, String transend, String placeend, XmlNode start, XmlNode end, String annotation) { 
 		start = start.getChildren().stream().filter(n -> n.getIdentifier().equals("posattr")).findFirst().get();
 		end = end.getChildren().stream().filter(n -> n.getIdentifier().equals("posattr")).findFirst().get();
 		double startX = Double.parseDouble(start.getProperty("x"));
@@ -314,30 +318,4 @@ public class XmlNodeFactory {
 	public XmlNode constraints() {
 		return new XmlNode("constraints", null, null, null);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
 }

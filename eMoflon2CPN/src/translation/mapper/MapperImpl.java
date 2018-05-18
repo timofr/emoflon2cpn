@@ -3,15 +3,21 @@ package translation.mapper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
 import translation.Mapper;
 import translation.TranslationException;
+import translation.mapper.methodConstructor.EmoflonMethod;
+import translation.mapper.methodConstructor.MethodConstructor;
+import translation.mapper.methodConstructor.MethodConstructorException;
+import translation.mapper.methodConstructor.MethodNameConstructorException;
 import translation.parser.XmlNode;
 
 public class MapperImpl implements Mapper {
+	private boolean onlyCpnFile;
 	private XmlNodeFactory factory = XmlNodeFactory.getFactory();;
 	private XmlNode emoflonTree;
 	private XmlNode cpnTree;
@@ -23,31 +29,45 @@ public class MapperImpl implements Mapper {
 	private List<XmlNode> places = new ArrayList<XmlNode>();
 	private List<XmlNode> trans = new ArrayList<XmlNode>();
 	private List<XmlNode> arcs = new ArrayList<XmlNode>();
-	private List<XmlNode> startstopNodes = new ArrayList<XmlNode>();
-	int port;
+	private Map<XmlNode, String> stopNodes = new HashMap<XmlNode, String>();
+	private XmlNode startNode;
+	private int port;
+	private Map<String, EmoflonMethod> methods = new HashMap<String, EmoflonMethod>();
+	private MethodConstructor methodConstructor;
 	
-	public MapperImpl(XmlNode emoflonTree) {
-		this(emoflonTree,9000);
+	public MapperImpl(XmlNode emoflonTree, Class<?> chosenClass, String chosenMethod, boolean onlyCpnFile) {
+		this(emoflonTree,9000, chosenClass, chosenMethod, onlyCpnFile);
 	}
 	
-	public MapperImpl(XmlNode emoflonTree, int port) {
+	public MapperImpl(XmlNode emoflonTree, int port, Class<?> chosenClass, String chosenMethod, boolean onlyCpnFile) {
 		this.emoflonTree = emoflonTree;
 		this.port = port;
+		this.onlyCpnFile = onlyCpnFile;
+		methodConstructor = new MethodConstructor(chosenClass, chosenMethod);
 	}
 	
-	public XmlNode getMappedCpnTree() throws TranslationException {
+	public Map<String, EmoflonMethod> getMethods() {
+		return methods;
+	}
+	
+	public XmlNode getMappedCpnTree() throws TranslationException, ClassNotFoundException {
 		try {
 			if(cpnTree == null)
 				cpnTree = startMapping();
 		}
-		catch (MapperException e) {
+		catch (MapperException  e) {
 			e.printStackTrace();
 			throw new TranslationException("Mapper could not handle xml tree");
+		} catch (MethodConstructorException e) {
+			e.printStackTrace();
+			throw new TranslationException("Mapper failed constructing method");
 		}
 		return cpnTree;
 	}
 	
-	private XmlNode startMapping() throws MapperException {
+	private XmlNode startMapping() throws MapperException, TranslationException, MethodConstructorException, ClassNotFoundException {
+		if(!onlyCpnFile)
+			methodConstructor.initialize();
 		cpnChildren.add(factory.pageattr(emoflonTree.getProperty("name")));
 		cpnProperties.put("id", factory.getNextId());
 		XmlNode cpn = new XmlNode("page", null, cpnChildren, cpnProperties);
@@ -63,6 +83,10 @@ public class MapperImpl implements Mapper {
 					XmlNode child = mapEmoflonNodeToCpnTransition(getProperty(xmlNode, "name"));
 					trans.add(child);
 					nodeMapping.put(xmlNode, child);
+					if(!onlyCpnFile) {
+						EmoflonMethod method = methodConstructor.constructMethod(xmlNode);
+						methods.put(method.getName(), method);
+					}
 				}	
 				else if(xsi_type.equals("activities:StatementNode")) {
 					XmlNode child = mapEmoflonNodeToCpnTransition(getProperty(xmlNode, "name"));
@@ -85,24 +109,22 @@ public class MapperImpl implements Mapper {
 				places.add(place);
 		}
 		
-		for(XmlNode place: startstopNodes) {
+		String startId = getProperty(startNode, "id");
+		XmlNode startPlace = factory.place("Start", "1`true");
+		XmlNode connectTrans = factory.trans(false,"connect", "action\nacceptConnection(\"Emoflon2Cpn\"," + port +  ")");
+		cpnChildren.add(startPlace);
+		cpnChildren.add(connectTrans);
+		arcs.add(factory.arc("PtoT", 1, getProperty(connectTrans, "id"), getProperty(startPlace, "id"), connectTrans, startPlace, "true"));
+		arcs.add(factory.arc("TtoP", 1, getProperty(connectTrans, "id"), startId, connectTrans, startNode, "true"));
+		for(XmlNode place: stopNodes.keySet()) {
+			String arcGuard = stopNodes.get(place);
 			String id = getProperty(place, "id");
-			if(place == startstopNodes.get(0)) {
-				XmlNode startPlace = factory.place("Start", "1`true");
-				XmlNode connectTrans = factory.trans(false,"connect", "action\nacceptConnection(\"Emoflon2Cpn\"," + port +  ")");
-				cpnChildren.add(startPlace);
-				cpnChildren.add(connectTrans);
-				arcs.add(factory.arc("PtoT", 1, getProperty(connectTrans, "id"), getProperty(startPlace, "id"), connectTrans, startPlace, "true"));
-				arcs.add(factory.arc("TtoP", 1, getProperty(connectTrans, "id"), id, connectTrans, place, "true"));
-			}
-			else {
-				XmlNode endPlace = factory.place("End", null);
-				XmlNode disconnectTrans = factory.trans(false, "disconnect", "action\ncloseConnection(\"Emoflon2Cpn\")");
-				cpnChildren.add(endPlace);
-				cpnChildren.add(disconnectTrans);
-				arcs.add(factory.arc("TtoP", 1, getProperty(disconnectTrans, "id"), getProperty(endPlace, "id"), disconnectTrans, endPlace, "true"));
-				arcs.add(factory.arc("PtoT", 1, getProperty(disconnectTrans, "id"), id, disconnectTrans, place, "true"));
-			}
+			XmlNode endPlace = factory.place("End", null);
+			XmlNode disconnectTrans = factory.trans(false, "disconnect", "action\ncloseConnection(\"Emoflon2Cpn\")");
+			cpnChildren.add(endPlace);
+			cpnChildren.add(disconnectTrans);
+			arcs.add(factory.arc("TtoP", 1, getProperty(disconnectTrans, "id"), getProperty(endPlace, "id"), disconnectTrans, endPlace, "true"));
+			arcs.add(factory.arc("PtoT", 1, getProperty(disconnectTrans, "id"), id, disconnectTrans, place, arcGuard));
 		}
 		
 		cpnChildren.addAll(places);
@@ -136,9 +158,16 @@ public class MapperImpl implements Mapper {
 		if(existingSourceArc != null) {
 			String existingPlaceId = getProperty(existingSourceArc.getChild("placeend"), "idref");
 			XmlNode existingPlace = places.stream().filter(p ->p.getProperty("id").equals(existingPlaceId)).findFirst().get();
-			arcs.add(factory.arc("PtoT", 1, targetId, existingPlaceId, targetTrans, existingPlace, arcGuard));
+			if(targetId != null) {
+				arcs.add(factory.arc("PtoT", 1, targetId, existingPlaceId, targetTrans, existingPlace, arcGuard));
+			}
+			else {
+				stopNodes.put(existingPlace, arcGuard);	
+			}
 			XmlNode child = existingPlace.getChild("text");
-			child.setContent(child.getContent() + "&amp;" +  targetNode.getProperty("name"));
+			String currentNamePart = null;
+			child.setContent(child.getContent() + "&amp;" +
+					((currentNamePart = targetNode.getProperty("name")) == null ? "StopNode" : currentNamePart));
 			return null;
 		}
 		
@@ -147,7 +176,9 @@ public class MapperImpl implements Mapper {
 			XmlNode existingPlace = places.stream().filter(p ->p.getProperty("id").equals(existingPlaceId)).findFirst().get();
 			arcs.add(factory.arc("TtoP", 1, targetId, existingPlaceId, targetTrans, existingPlace, "receive()"));
 			XmlNode child = existingPlace.getChild("text");
-			child.setContent(sourceNode.getProperty("name") + "&amp;" +  child.getContent());
+			String currentNamePart = null;
+			child.setContent(((currentNamePart = sourceNode.getProperty("name")) == null ? "StopNode" : currentNamePart)
+					+ "&amp;" +  child.getContent());
 			return null;
 		}
 		StringBuilder nameBuilder = new StringBuilder();
@@ -160,12 +191,12 @@ public class MapperImpl implements Mapper {
 		if(sourceId != null) {
 			arcs.add(factory.arc("TtoP", 1, sourceId, placeId, sourceTrans, place, "receive()"));
 		} else {
-			startstopNodes.add(0, place);
+			startNode = place;
 		}
 		if(targetId != null) {
 			arcs.add(factory.arc("PtoT", 1, targetId, placeId, targetTrans, place, arcGuard));
 		} else {
-			startstopNodes.add(place);
+			stopNodes.put(place, arcGuard);
 		}
 		return place;
 	}

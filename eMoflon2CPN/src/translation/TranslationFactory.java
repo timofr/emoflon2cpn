@@ -3,6 +3,7 @@
  */
 package translation;
 
+import java.io.File;
 import java.util.List;
 
 import translation.chooser.ChooserImpl;
@@ -19,6 +20,8 @@ import translation.parser.XmlNode;
  *
  */
 public class TranslationFactory {
+	
+	
 	public static Lexer getLexer(String input) {
 		return new LexerImpl(input);
 	}
@@ -31,8 +34,8 @@ public class TranslationFactory {
 		return new ChooserImpl(node);
 	}
 	
-	public static Mapper getMapper(XmlNode node) {
-		return new MapperImpl(node);
+	public static Mapper getMapper(XmlNode node, Class<?> chosenClass, String chosenMethod) {
+		return new MapperImpl(node, chosenClass, chosenMethod, false);
 	}
 	
 	public static Inserter getInserter(XmlNode node) {
@@ -41,5 +44,9 @@ public class TranslationFactory {
 	
 	public static Generator getGenerator(XmlNode node) {
 		return new GeneratorImpl(node);
+	}
+	
+	public static DirectoryHandler getDirectoryHandler(File directory) {
+		return new DirectoryHandler(directory);
 	}
 }
