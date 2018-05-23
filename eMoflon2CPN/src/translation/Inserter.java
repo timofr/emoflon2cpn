@@ -14,5 +14,5 @@ import translation.parser.XmlNode;
  *
  */
 public interface Inserter {
-	public XmlNode getTree() throws TranslationException, IOException;
+	public XmlNode getTree();
 }

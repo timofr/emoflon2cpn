@@ -41,14 +41,12 @@ public class Simulation {
 	private XmiReader reader;
 	private File xmiFile;
 	
-	public void initialize() throws ClassNotFoundException, SimulationException {
+	public void initialize() {
 		Translation translation = Translation.getTranslation();
 		projectName = translation.getProjectName();
 		reader = new XmiReader(translation.getClassLoader());
 		reader.initialize(projectName);
-		Chooser chooser = translation.getChooser();
-		System.out.println(chooser.getXmiFiles(translation.getDirectoryHandler().getXmi()));
-		xmiFile = chooser.chooseXmiFile();
+		xmiFile = translation.getChosenXmiFile();
 		object = reader.load(xmiFile);
 		objects.put("_this", object);
 		methods = Translation.getTranslation().getMapper().getMethods();

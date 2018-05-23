@@ -1,12 +1,14 @@
 package translation.parser;
 
+import translation.TranslationException;
+
 /**
  * Exception of the parser.
  * 
  * @author Timo Freitag
  *
  */
-public class ParserException extends Exception {
+public class ParserException extends TranslationException {
 
 	/**
 	 * Constructs a ParserException with a given message.

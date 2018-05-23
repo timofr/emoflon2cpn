@@ -66,9 +66,8 @@ public class LexerImpl implements Lexer {
 	 * 
 	 * @param n offset
 	 * @return the char with the offset to the currentPosition
-	 * @throws LexerException is thrown when the lookahead isnt in the bounds of the input string
 	 */
-	private char getLookaheadChar(int n) throws LexerException {
+	private char getLookaheadChar(int n) {
 		if(currentPosition + n < input.length() && 0 <= currentPosition + n)
 			currentChar = input.charAt(currentPosition + n);
 		else 
@@ -91,14 +90,9 @@ public class LexerImpl implements Lexer {
 
 	@Override
 	public List<Token> getTokenList() throws TranslationException  {
-		try {
-			if (tokens == null) {
-				tokens = new ArrayList<Token>();
-				startLexing();
-			}
-		} catch(LexerException e) {
-			e.printStackTrace();
-			throw new TranslationException("Lexer couldn't lex your code");
+		if (tokens == null) {
+			tokens = new ArrayList<Token>();
+			startLexing();
 		}
 		return tokens;
 	}
@@ -108,11 +102,8 @@ public class LexerImpl implements Lexer {
 	 * It analysis the input string with regard to a xml-code
 	 * and devide it into different Tokens with a specific TokenType.
 	 * It takes care when the last char of the string occurs.
-	 * @return 
-	 * 
-	 * @throws LexerException is thrown when something fails while lexing.
 	 */
-	private void startLexing() throws LexerException  {
+	private void startLexing() {
 		initializeTokenMap();
 		getNextChar();
 		boolean illegalCharFound = true;
@@ -179,9 +170,8 @@ public class LexerImpl implements Lexer {
 	 * 
 	 * @param builder StringBuilder for a content(not needed).
 	 * @return Token of TokenType.OPENANGLEBRACKETTOKEN
-	 * @throws LexerException is thrown when lookahead fails.
 	 */
-	private Token handleOpenAngleBracket(StringBuilder builder) throws LexerException {
+	private Token handleOpenAngleBracket(StringBuilder builder) {
 		char lookahead = getLookaheadChar(1);
 		if(lookahead == '!'|| lookahead == '?') {
 			getNextChar();
@@ -231,9 +221,8 @@ public class LexerImpl implements Lexer {
 	 * Handles a string.
 	 * @param builder StringBuilder to build the content of the string.
 	 * @return Token of TokenType.STRINGTOKEN
-	 * @throws LexerException is thrown when the string was not closed.
 	 */
-	private Token handleString(StringBuilder builder) throws LexerException {
+	private Token handleString(StringBuilder builder) {
 		if(currentChar == EOF) throw new LexerException("String was not closed.");
 		if(builder == null) builder = new StringBuilder();
 		

@@ -40,16 +40,15 @@ public class XmiReader {
 		this.classLoader = classLoader;
 	}
 	
-	public void initialize(String projectName) throws ClassNotFoundException, SimulationException {
+	public void initialize(String projectName) {
 		resourceSet = new ResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(ResourceFactoryRegistryImpl.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
 		
-		Class<?> pack = classLoader.loadClass(directoryHandler.getFullClassName(projectName + "Package"));
 		try {
+			Class<?> pack = classLoader.loadClass(directoryHandler.getFullClassName(projectName + "Package"));
 			Field field = pack.getField("eINSTANCE");
 			field.get(null);
-		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-			e.printStackTrace();
+		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException | ClassNotFoundException e) {
 			throw new SimulationException("Failed to initialize the XmiReader");
 		}
 	}

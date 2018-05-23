@@ -9,7 +9,7 @@ package translation;
  * @author Timo Freitag
  *
  */
-public class TranslationException extends Exception {
+public class TranslationException extends RuntimeException {
 	/**
 	 * Constructs a TranslationException with a given message
 	 * 
@@ -17,5 +17,14 @@ public class TranslationException extends Exception {
 	 */
 	public TranslationException(String msg) {
 		super(msg);
+	}
+	
+	/**
+	 * Constructs a TranslationException with a given exception
+	 * 
+	 * @param e exception
+	 */
+	public TranslationException(Exception e) {
+		super(e);
 	}
 }

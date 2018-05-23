@@ -1,22 +1,19 @@
 package translation;
 
 import java.io.File;
+import java.util.List;
 
 import translation.chooser.ChooserException;
 import translation.parser.XmlNode;
 
 public interface Chooser {
-	public String getClasses() throws ChooserException;
+	public List<String> getClasses();
 	
-	public String getMethods() throws ChooserException;
+	public List<String> getMethods();
 
-	public XmlNode chooseClass() throws ChooserException;
+	public XmlNode chooseClass(String name);
 
-	public XmlNode chooseMethod() throws ChooserException;
-	
-	public String getXmiFiles(File[] xmis);
-	
-	public File chooseXmiFile();
+	public XmlNode chooseMethod(String name);
 	
 	public XmlNode getMethodNode();
 	

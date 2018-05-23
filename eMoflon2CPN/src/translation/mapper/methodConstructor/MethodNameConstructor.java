@@ -34,7 +34,7 @@ public class MethodNameConstructor {
 		this.chosenMethod = chosenMethod;
 	}
 	
-	public void initialize() throws MethodNameConstructorException, TranslationException {
+	public void initialize() {
 		XmlNode methodNode = findMethodNumber();
 		if(methodNode == null) throw new MethodNameConstructorException("MethodNameConstructor did not fount method " + chosenMethod + " in class" + chosenClass + ".");
 		addStoryPatterns(methodNode);
@@ -59,7 +59,7 @@ public class MethodNameConstructor {
 		}
 	}
 	
-	private XmlNode findMethodNumber() throws TranslationException, MethodNameConstructorException {
+	private XmlNode findMethodNumber() {
 		XmlNode node = parser.getXmlTree();
 		if(!node.getIdentifier().equals("ecore:EPackage")) throw new MethodNameConstructorException("Current node isnt a ecore:Package. It is a " + node.getIdentifier());
 		for(XmlNode eClassifier : node.getChildren()) {

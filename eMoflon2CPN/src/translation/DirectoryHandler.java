@@ -15,7 +15,7 @@ import java.util.List;
 public class DirectoryHandler {
 	private File project;
 	private File ecore;
-	private File[] xmi;
+	private File xmi;
 	private File bin;
 	private File cpn;
 	
@@ -26,12 +26,8 @@ public class DirectoryHandler {
 	public void initialize() {
 		ecore = new File(project.getAbsolutePath() + File.separatorChar + "model" + File.separatorChar + project.getName() + ".ecore");
 		bin = new File(project.getAbsolutePath() + File.separatorChar + "bin" + File.separator);
-		xmi = getDynamicObjectFiles(new File(project.getAbsolutePath() + File.separatorChar + "instances"));
+		xmi = new File(project.getAbsolutePath() + File.separatorChar + "instances");
 		cpn = new File(project.getAbsolutePath() + File.separator + "cpn" + File.separator + project.getName() +".cpn");
-	}
-	
-	private File[] getDynamicObjectFiles(File instances) {
-		return instances.listFiles(f ->  f.getName().toLowerCase().endsWith(".xmi"));
 	}
 
 	public File getProject() {
@@ -42,7 +38,7 @@ public class DirectoryHandler {
 		return ecore;
 	}
 
-	public File[] getXmi() {
+	public File getXmi() {
 		return xmi;
 	}
 	

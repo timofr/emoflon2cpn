@@ -44,14 +44,14 @@ public class MethodConstructor {
 		this.directoryHandler = Translation.getTranslation().getDirectoryHandler();
 	}
 	
-	public void initialize() throws  MethodNameConstructorException, TranslationException {
+	public void initialize() {
 		methodNameConstructor = new MethodNameConstructor(Translation.getTranslation().getParser(),
 				chosenClass.getSimpleName().replace("Impl", ""), chosenMethod);
 		methodNameConstructor.initialize();
 		
 	}
 	
-	public EmoflonMethod constructMethod(XmlNode ownedActivityNode) throws MethodConstructorException, ClassNotFoundException {
+	public EmoflonMethod constructMethod(XmlNode ownedActivityNode) {
 		XmlNode storyPattern = ownedActivityNode.getChild("storyPattern");
 		String activityName = ownedActivityNode.getProperty("name");
 		String storyComment = storyPattern.getProperty("comment");
@@ -95,7 +95,12 @@ public class MethodConstructor {
 			String bindingOperator = objectVariable.getProperty("bindingOperator");
 			String name = objectVariable.getProperty("name");
 			List<String> address = EmoflonAddressInterpreter.addressToList(objectVariable.getProperty("type"));
-			Class<?> type = classLoader.loadClass(directoryHandler.getFullClassName(address.get(address.size() - 1)));
+			Class<?> type;
+			try {
+				type = classLoader.loadClass(directoryHandler.getFullClassName(address.get(address.size() - 1)));
+			} catch (ClassNotFoundException e) {
+				throw new MethodConstructorException(e);
+			}
 			classes.put(address.get(address.size() - 1), type);
 			String bindingState = objectVariable.getProperty("bindingState");
 			String bindingSemantics = objectVariable.getProperty("bindingSemantics");

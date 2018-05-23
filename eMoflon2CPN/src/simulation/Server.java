@@ -8,6 +8,7 @@ import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BooleanSupplier;
+import java.util.function.Consumer;
 
 import javacpn.EncodeDecode;
 import javacpn.JavaCPN;
@@ -24,26 +25,29 @@ public class Server {
 	private JavaCPNInterface cpn = new JavaCPN();
 	private String path;
 	private Simulation simulation = new Simulation();
+	private Consumer<String> writer;
 	
-	public Server(int port) {
+	public Server(int port, Consumer<String> writer) {
+		this.writer = writer;
 		this.port = port;
 	}
 	
-	public void communicate() throws IOException, ClassNotFoundException, SimulationException {
+	public void communicate() {
 		simulation.initialize();
-		cpn.connect("localhost", port);
-		System.out.println("Connected");
-		polling();
-		cpn.disconnect();
-		System.out.println("Disconnected");
+		try {
+			cpn.connect("localhost", port);
+			polling();
+			cpn.disconnect();
+		} catch (IOException e) {
+			throw new SimulationException(e);
+		}
 	}
 	
-	public void polling() {
+	private void polling() {
 		boolean finished = false;
 		try {
 			while(!finished) {
 				String msg = EncodeDecode.decodeString(cpn.receive());
-				System.out.println(msg);
 				boolean result = false;
 				try {
 					result = simulation.invoke(msg);
@@ -51,11 +55,12 @@ public class Server {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				writer.accept("ActivityNode: \"" + msg + "\" Result: \"" + result + "\"");
 				cpn.send(EncodeDecode.encode(Boolean.toString(result)));
 			}
 		}
 		catch(IOException e) {
-			e.printStackTrace();
+			throw new DisconnectedException("CPN Tools disconnected.");
 		}
 	}
 	

@@ -36,7 +36,7 @@ public class MapperImpl implements Mapper {
 	private MethodConstructor methodConstructor;
 	
 	public MapperImpl(XmlNode emoflonTree, Class<?> chosenClass, String chosenMethod, boolean onlyCpnFile) {
-		this(emoflonTree,9000, chosenClass, chosenMethod, onlyCpnFile);
+		this(emoflonTree, 9000, chosenClass, chosenMethod, onlyCpnFile);
 	}
 	
 	public MapperImpl(XmlNode emoflonTree, int port, Class<?> chosenClass, String chosenMethod, boolean onlyCpnFile) {
@@ -50,24 +50,17 @@ public class MapperImpl implements Mapper {
 		return methods;
 	}
 	
-	public XmlNode getMappedCpnTree() throws TranslationException, ClassNotFoundException {
-		try {
-			if(cpnTree == null)
-				cpnTree = startMapping();
-		}
-		catch (MapperException  e) {
-			e.printStackTrace();
-			throw new TranslationException("Mapper could not handle xml tree");
-		} catch (MethodConstructorException e) {
-			e.printStackTrace();
-			throw new TranslationException("Mapper failed constructing method");
-		}
+	public XmlNode getMappedCpnTree() {
+		if(cpnTree == null)
+			cpnTree = startMapping();
+		
 		return cpnTree;
 	}
 	
-	private XmlNode startMapping() throws MapperException, TranslationException, MethodConstructorException, ClassNotFoundException {
+	private XmlNode startMapping() {
 		if(!onlyCpnFile)
 			methodConstructor.initialize();
+		
 		cpnChildren.add(factory.pageattr(emoflonTree.getProperty("name")));
 		cpnProperties.put("id", factory.getNextId());
 		XmlNode cpn = new XmlNode("page", null, cpnChildren, cpnProperties);
@@ -134,7 +127,7 @@ public class MapperImpl implements Mapper {
 		return cpn;
 	}
 	
-	private XmlNode mapEmoflonEdgeToCpnPlace(XmlNode edge) throws MapperException {
+	private XmlNode mapEmoflonEdgeToCpnPlace(XmlNode edge) {
 		int source = EmoflonAddressInterpreter.addressToNumber(getProperty(edge, "source"));
 		int target = EmoflonAddressInterpreter.addressToNumber(getProperty(edge, "target"));
 		XmlNode sourceNode = nodes.get(source);

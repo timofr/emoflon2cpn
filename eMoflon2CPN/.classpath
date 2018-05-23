@@ -2,8 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/timof/Desktop/Dateien/Workspaces/org.eclipse.emf.ecore_2.13.0.v20170609-0707.jar"/>
-	<classpathentry kind="lib" path="C:/Users/timof/Desktop/Dateien/Workspaces/org.eclipse.emf.common_2.13.0.v20170609-0707.jar"/>
-	<classpathentry kind="lib" path="C:/Users/timof/Desktop/Dateien/Workspaces/org.eclipse.emf.ecore.xmi_2.13.0.v20170609-0707.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Timo/Desktop/Dateien/Workspaces/Library/org.eclipse.emf.common_2.13.0.v20170609-0707.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Timo/Desktop/Dateien/Workspaces/Library/org.eclipse.emf.ecore.xmi_2.13.0.v20170609-0707.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Timo/Desktop/Dateien/Workspaces/Library/org.eclipse.emf.ecore_2.13.0.v20170609-0707.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -6,6 +6,6 @@ import translation.parser.XmlNode;
 
 public interface Parser {
 
-	public XmlNode getXmlTree() throws TranslationException;
+	public XmlNode getXmlTree();
 	
 }

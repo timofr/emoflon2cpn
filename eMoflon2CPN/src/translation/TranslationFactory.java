@@ -34,8 +34,12 @@ public class TranslationFactory {
 		return new ChooserImpl(node);
 	}
 	
-	public static Mapper getMapper(XmlNode node, Class<?> chosenClass, String chosenMethod) {
-		return new MapperImpl(node, chosenClass, chosenMethod, false);
+//	public static Mapper getMapper(XmlNode node, Class<?> chosenClass, String chosenMethod) {
+//		return new MapperImpl(node, chosenClass, chosenMethod, false);
+//	}
+	
+	public static Mapper getMapper(XmlNode node, int port, Class<?> chosenClass, String chosenMethod) {
+		return new MapperImpl(node, port, chosenClass, chosenMethod, false);
 	}
 	
 	public static Inserter getInserter(XmlNode node) {

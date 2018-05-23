@@ -118,8 +118,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
         </initmark>
       </place>
       <place id="ID1524136179">
-        <posattr x="588.000000"
-                 y="474.000000"/>
+        <posattr x="630.000000"
+                 y="533.000000"/>
         <fillattr colour="White"
                   pattern="Solid"
                   filled="false"/>
@@ -141,8 +141,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
                 anchor.vertical="0"/>
         </marking>
         <type id="ID1524136177">
-          <posattr x="629.500000"
-                   y="450.000000"/>
+          <posattr x="671.500000"
+                   y="509.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -155,8 +155,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
                 version="4.0.1">BOOL</text>
         </type>
         <initmark id="ID1524136178">
-          <posattr x="644.000000"
-                   y="497.000000"/>
+          <posattr x="686.000000"
+                   y="556.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -170,8 +170,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
         </initmark>
       </place>
       <place id="ID1524136191">
-        <posattr x="900.000000"
-                 y="600.000000"/>
+        <posattr x="661.000000"
+                 y="-84.000000"/>
         <fillattr colour="White"
                   pattern="Solid"
                   filled="false"/>
@@ -193,8 +193,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
                 anchor.vertical="0"/>
         </marking>
         <type id="ID1524136189">
-          <posattr x="941.500000"
-                   y="576.000000"/>
+          <posattr x="702.500000"
+                   y="-107.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -207,8 +207,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
                 version="4.0.1">BOOL</text>
         </type>
         <initmark id="ID1524136190">
-          <posattr x="956.000000"
-                   y="623.000000"/>
+          <posattr x="717.000000"
+                   y="-60.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -274,8 +274,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
         </initmark>
       </place>
       <place id="ID1524136148">
-        <posattr x="150.000000"
-                 y="0.000000"/>
+        <posattr x="210.000000"
+                 y="252.000000"/>
         <fillattr colour="White"
                   pattern="Solid"
                   filled="false"/>
@@ -297,8 +297,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
                 anchor.vertical="0"/>
         </marking>
         <type id="ID1524136146">
-          <posattr x="191.500000"
-                   y="-23.000000"/>
+          <posattr x="251.500000"
+                   y="228.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -311,8 +311,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
                 version="4.0.1">BOOL</text>
         </type>
         <initmark id="ID1524136147">
-          <posattr x="206.000000"
-                   y="23.000000"/>
+          <posattr x="266.000000"
+                   y="275.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -326,8 +326,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
         </initmark>
       </place>
       <place id="ID1524136157">
-        <posattr x="304.000000"
-                 y="280.000000"/>
+        <posattr x="588.000000"
+                 y="252.000000"/>
         <fillattr colour="White"
                   pattern="Solid"
                   filled="false"/>
@@ -349,8 +349,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
                 anchor.vertical="0"/>
         </marking>
         <type id="ID1524136155">
-          <posattr x="345.500000"
-                   y="256.000000"/>
+          <posattr x="629.500000"
+                   y="228.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -363,8 +363,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
                 version="4.0.1">BOOL</text>
         </type>
         <initmark id="ID1524136156">
-          <posattr x="360.000000"
-                   y="303.000000"/>
+          <posattr x="644.000000"
+                   y="275.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -378,8 +378,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
         </initmark>
       </place>
       <place id="ID1524136162">
-        <posattr x="478.000000"
-                 y="16.000000"/>
+        <posattr x="210.000000"
+                 y="-84.000000"/>
         <fillattr colour="White"
                   pattern="Solid"
                   filled="false"/>
@@ -401,8 +401,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
                 anchor.vertical="0"/>
         </marking>
         <type id="ID1524136160">
-          <posattr x="519.500000"
-                   y="-7.000000"/>
+          <posattr x="251.500000"
+                   y="-107.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -415,8 +415,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
                 version="4.0.1">BOOL</text>
         </type>
         <initmark id="ID1524136161">
-          <posattr x="534.000000"
-                   y="39.000000"/>
+          <posattr x="266.000000"
+                   y="-60.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -431,8 +431,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
       </place>
       <trans id="ID1524136172"
              explicit="false">
-        <posattr x="126.000000"
-                 y="420.000000"/>
+        <posattr x="69.000000"
+                 y="546.000000"/>
         <fillattr colour="White"
                   pattern="Solid"
                   filled="false"/>
@@ -447,8 +447,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
         <binding x="7.200000"
                  y="-3.000000"/>
         <cond id="ID1524136168">
-          <posattr x="87.000000"
-                   y="451.000000"/>
+          <posattr x="30.000000"
+                   y="577.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -461,8 +461,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
                 version="4.0.1"/>
         </cond>
         <time id="ID1524136169">
-          <posattr x="170.500000"
-                   y="451.000000"/>
+          <posattr x="113.500000"
+                   y="577.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -475,8 +475,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
                 version="4.0.1"/>
         </time>
         <code id="ID1524136170">
-          <posattr x="190.500000"
-                   y="368.000000"/>
+          <posattr x="229.500000"
+                   y="546.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -490,8 +490,8 @@ ConnManagementLayer.send(&quot;Emoflon2Cpn&quot;,msg,stringEncode)</layout>
 acceptConnection(&quot;Emoflon2Cpn&quot;,9000)</text>
         </code>
         <priority id="ID1524136171">
-          <posattr x="58.000000"
-                   y="389.000000"/>
+          <posattr x="1.000000"
+                   y="515.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -506,8 +506,8 @@ acceptConnection(&quot;Emoflon2Cpn&quot;,9000)</text>
       </trans>
       <trans id="ID1524136184"
              explicit="false">
-        <posattr x="522.000000"
-                 y="326.000000"/>
+        <posattr x="462.000000"
+                 y="533.000000"/>
         <fillattr colour="White"
                   pattern="Solid"
                   filled="false"/>
@@ -522,8 +522,8 @@ acceptConnection(&quot;Emoflon2Cpn&quot;,9000)</text>
         <binding x="7.200000"
                  y="-3.000000"/>
         <cond id="ID1524136180">
-          <posattr x="483.000000"
-                   y="357.000000"/>
+          <posattr x="423.000000"
+                   y="564.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -536,8 +536,8 @@ acceptConnection(&quot;Emoflon2Cpn&quot;,9000)</text>
                 version="4.0.1"/>
         </cond>
         <time id="ID1524136181">
-          <posattr x="566.500000"
-                   y="357.000000"/>
+          <posattr x="506.500000"
+                   y="564.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -550,8 +550,8 @@ acceptConnection(&quot;Emoflon2Cpn&quot;,9000)</text>
                 version="4.0.1"/>
         </time>
         <code id="ID1524136182">
-          <posattr x="586.500000"
-                   y="274.000000"/>
+          <posattr x="465.000000"
+                   y="439.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -565,8 +565,8 @@ acceptConnection(&quot;Emoflon2Cpn&quot;,9000)</text>
 closeConnection(&quot;Emoflon2Cpn&quot;)</text>
         </code>
         <priority id="ID1524136183">
-          <posattr x="454.000000"
-                   y="295.000000"/>
+          <posattr x="394.000000"
+                   y="502.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -581,8 +581,8 @@ closeConnection(&quot;Emoflon2Cpn&quot;)</text>
       </trans>
       <trans id="ID1524136196"
              explicit="false">
-        <posattr x="750.000000"
-                 y="450.000000"/>
+        <posattr x="521.000000"
+                 y="-84.000000"/>
         <fillattr colour="White"
                   pattern="Solid"
                   filled="false"/>
@@ -597,8 +597,8 @@ closeConnection(&quot;Emoflon2Cpn&quot;)</text>
         <binding x="7.200000"
                  y="-3.000000"/>
         <cond id="ID1524136192">
-          <posattr x="711.000000"
-                   y="481.000000"/>
+          <posattr x="482.000000"
+                   y="-53.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -611,8 +611,8 @@ closeConnection(&quot;Emoflon2Cpn&quot;)</text>
                 version="4.0.1"/>
         </cond>
         <time id="ID1524136193">
-          <posattr x="794.500000"
-                   y="481.000000"/>
+          <posattr x="565.500000"
+                   y="-53.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -625,8 +625,8 @@ closeConnection(&quot;Emoflon2Cpn&quot;)</text>
                 version="4.0.1"/>
         </time>
         <code id="ID1524136194">
-          <posattr x="814.500000"
-                   y="398.000000"/>
+          <posattr x="585.500000"
+                   y="-136.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -640,8 +640,8 @@ closeConnection(&quot;Emoflon2Cpn&quot;)</text>
 closeConnection(&quot;Emoflon2Cpn&quot;)</text>
         </code>
         <priority id="ID1524136195">
-          <posattr x="682.000000"
-                   y="419.000000"/>
+          <posattr x="453.000000"
+                   y="-115.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -656,8 +656,8 @@ closeConnection(&quot;Emoflon2Cpn&quot;)</text>
       </trans>
       <trans id="ID1524136130"
              explicit="false">
-        <posattr x="0.000000"
-                 y="150.000000"/>
+        <posattr x="84.000000"
+                 y="252.000000"/>
         <fillattr colour="White"
                   pattern="Solid"
                   filled="false"/>
@@ -672,8 +672,8 @@ closeConnection(&quot;Emoflon2Cpn&quot;)</text>
         <binding x="7.200000"
                  y="-3.000000"/>
         <cond id="ID1524136126">
-          <posattr x="-39.000000"
-                   y="181.000000"/>
+          <posattr x="45.000000"
+                   y="283.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -686,8 +686,8 @@ closeConnection(&quot;Emoflon2Cpn&quot;)</text>
                 version="4.0.1"/>
         </cond>
         <time id="ID1524136127">
-          <posattr x="44.500000"
-                   y="181.000000"/>
+          <posattr x="128.500000"
+                   y="283.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -700,8 +700,8 @@ closeConnection(&quot;Emoflon2Cpn&quot;)</text>
                 version="4.0.1"/>
         </time>
         <code id="ID1524136128">
-          <posattr x="64.500000"
-                   y="98.000000"/>
+          <posattr x="122.000000"
+                   y="290.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -715,8 +715,8 @@ closeConnection(&quot;Emoflon2Cpn&quot;)</text>
 send(&quot;find&quot;)</text>
         </code>
         <priority id="ID1524136129">
-          <posattr x="-68.000000"
-                   y="119.000000"/>
+          <posattr x="16.000000"
+                   y="221.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -731,8 +731,8 @@ send(&quot;find&quot;)</text>
       </trans>
       <trans id="ID1524136135"
              explicit="false">
-        <posattr x="150.000000"
-                 y="150.000000"/>
+        <posattr x="409.000000"
+                 y="252.000000"/>
         <fillattr colour="White"
                   pattern="Solid"
                   filled="false"/>
@@ -747,8 +747,8 @@ send(&quot;find&quot;)</text>
         <binding x="7.200000"
                  y="-3.000000"/>
         <cond id="ID1524136131">
-          <posattr x="111.000000"
-                   y="181.000000"/>
+          <posattr x="370.000000"
+                   y="283.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -761,8 +761,8 @@ send(&quot;find&quot;)</text>
                 version="4.0.1"/>
         </cond>
         <time id="ID1524136132">
-          <posattr x="194.500000"
-                   y="181.000000"/>
+          <posattr x="453.500000"
+                   y="283.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -775,8 +775,8 @@ send(&quot;find&quot;)</text>
                 version="4.0.1"/>
         </time>
         <code id="ID1524136133">
-          <posattr x="214.500000"
-                   y="98.000000"/>
+          <posattr x="473.500000"
+                   y="200.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -790,8 +790,8 @@ send(&quot;find&quot;)</text>
 send(&quot;found&quot;)</text>
         </code>
         <priority id="ID1524136134">
-          <posattr x="82.000000"
-                   y="119.000000"/>
+          <posattr x="341.000000"
+                   y="221.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -806,8 +806,8 @@ send(&quot;found&quot;)</text>
       </trans>
       <trans id="ID1524136140"
              explicit="false">
-        <posattr x="308.000000"
-                 y="0.000000"/>
+        <posattr x="210.000000"
+                 y="103.000000"/>
         <fillattr colour="White"
                   pattern="Solid"
                   filled="false"/>
@@ -822,8 +822,8 @@ send(&quot;found&quot;)</text>
         <binding x="7.200000"
                  y="-3.000000"/>
         <cond id="ID1524136136">
-          <posattr x="269.000000"
-                   y="31.000000"/>
+          <posattr x="171.000000"
+                   y="134.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -836,8 +836,8 @@ send(&quot;found&quot;)</text>
                 version="4.0.1"/>
         </cond>
         <time id="ID1524136137">
-          <posattr x="352.500000"
-                   y="31.000000"/>
+          <posattr x="254.500000"
+                   y="134.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -850,8 +850,8 @@ send(&quot;found&quot;)</text>
                 version="4.0.1"/>
         </time>
         <code id="ID1524136138">
-          <posattr x="372.500000"
-                   y="-52.000000"/>
+          <posattr x="274.500000"
+                   y="51.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -865,8 +865,8 @@ send(&quot;found&quot;)</text>
 send(&quot;notFound&quot;)</text>
         </code>
         <priority id="ID1524136139">
-          <posattr x="240.000000"
-                   y="-31.000000"/>
+          <posattr x="142.000000"
+                   y="72.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -897,8 +897,8 @@ send(&quot;notFound&quot;)</text>
         <transend idref="ID1524136130"/>
         <placeend idref="ID1524136143"/>
         <annot id="ID1524136144">
-          <posattr x="0.000000"
-                   y="150.000000"/>
+          <posattr x="36.000000"
+                   y="241.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -929,8 +929,8 @@ send(&quot;notFound&quot;)</text>
         <transend idref="ID1524136130"/>
         <placeend idref="ID1524136148"/>
         <annot id="ID1524136149">
-          <posattr x="0.000000"
-                   y="150.000000"/>
+          <posattr x="148.000000"
+                   y="241.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -961,8 +961,8 @@ send(&quot;notFound&quot;)</text>
         <transend idref="ID1524136135"/>
         <placeend idref="ID1524136148"/>
         <annot id="ID1524136151">
-          <posattr x="114.000000"
-                   y="94.000000"/>
+          <posattr x="308.000000"
+                   y="263.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -993,8 +993,8 @@ send(&quot;notFound&quot;)</text>
         <transend idref="ID1524136140"/>
         <placeend idref="ID1524136148"/>
         <annot id="ID1524136153">
-          <posattr x="238.000000"
-                   y="11.000000"/>
+          <posattr x="229.000000"
+                   y="167.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -1025,8 +1025,8 @@ send(&quot;notFound&quot;)</text>
         <transend idref="ID1524136135"/>
         <placeend idref="ID1524136157"/>
         <annot id="ID1524136158">
-          <posattr x="254.500000"
-                   y="176.000000"/>
+          <posattr x="492.000000"
+                   y="221.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -1057,8 +1057,8 @@ send(&quot;notFound&quot;)</text>
         <transend idref="ID1524136140"/>
         <placeend idref="ID1524136162"/>
         <annot id="ID1524136163">
-          <posattr x="401.500000"
-                   y="-21.000000"/>
+          <posattr x="162.500000"
+                   y="2.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -1089,8 +1089,8 @@ send(&quot;notFound&quot;)</text>
         <transend idref="ID1524136172"/>
         <placeend idref="ID1524136167"/>
         <annot id="ID1524136173">
-          <posattr x="208.000000"
-                   y="465.000000"/>
+          <posattr x="167.000000"
+                   y="522.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -1121,8 +1121,8 @@ send(&quot;notFound&quot;)</text>
         <transend idref="ID1524136172"/>
         <placeend idref="ID1524136143"/>
         <annot id="ID1524136175">
-          <posattr x="68.000000"
-                   y="351.000000"/>
+          <posattr x="40.000000"
+                   y="386.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -1153,8 +1153,8 @@ send(&quot;notFound&quot;)</text>
         <transend idref="ID1524136184"/>
         <placeend idref="ID1524136179"/>
         <annot id="ID1524136185">
-          <posattr x="531.000000"
-                   y="390.000000"/>
+          <posattr x="528.000000"
+                   y="543.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -1185,8 +1185,8 @@ send(&quot;notFound&quot;)</text>
         <transend idref="ID1524136184"/>
         <placeend idref="ID1524136157"/>
         <annot id="ID1524136187">
-          <posattr x="424.000000"
-                   y="345.000000"/>
+          <posattr x="472.000000"
+                   y="404.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -1217,8 +1217,8 @@ send(&quot;notFound&quot;)</text>
         <transend idref="ID1524136196"/>
         <placeend idref="ID1524136191"/>
         <annot id="ID1524136197">
-          <posattr x="750.000000"
-                   y="450.000000"/>
+          <posattr x="579.000000"
+                   y="-47.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -1249,8 +1249,8 @@ send(&quot;notFound&quot;)</text>
         <transend idref="ID1524136196"/>
         <placeend idref="ID1524136162"/>
         <annot id="ID1524136199">
-          <posattr x="750.000000"
-                   y="450.000000"/>
+          <posattr x="320.000000"
+                   y="-48.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -1290,32 +1290,7 @@ send(&quot;notFound&quot;)</text>
           <text>&lt;same as model&gt;</text>
         </value>
       </option>
-      <option name="extensions.10003.enable">
-        <value>
-          <boolean>true</boolean>
-        </value>
-      </option>
-      <option name="extensions.10005.enable">
-        <value>
-          <boolean>true</boolean>
-        </value>
-      </option>
-      <option name="extensions.10008.enable">
-        <value>
-          <boolean>true</boolean>
-        </value>
-      </option>
-      <option name="extensions.10001.enable">
-        <value>
-          <boolean>true</boolean>
-        </value>
-      </option>
-      <option name="extensions.10006.enable">
-        <value>
-          <boolean>true</boolean>
-        </value>
-      </option>
-      <option name="extensions.10007.enable">
+      <option name="extensions.10004.enable">
         <value>
           <boolean>true</boolean>
         </value>
@@ -1325,22 +1300,47 @@ send(&quot;notFound&quot;)</text>
           <boolean>true</boolean>
         </value>
       </option>
+      <option name="extensions.10007.enable">
+        <value>
+          <boolean>true</boolean>
+        </value>
+      </option>
+      <option name="extensions.10001.enable">
+        <value>
+          <boolean>true</boolean>
+        </value>
+      </option>
+      <option name="extensions.10005.enable">
+        <value>
+          <boolean>true</boolean>
+        </value>
+      </option>
+      <option name="extensions.10003.enable">
+        <value>
+          <boolean>true</boolean>
+        </value>
+      </option>
+      <option name="extensions.10008.enable">
+        <value>
+          <boolean>true</boolean>
+        </value>
+      </option>
       <option name="extensions.10002.enable">
         <value>
           <boolean>true</boolean>
         </value>
       </option>
-      <option name="extensions.10004.enable">
+      <option name="extensions.10006.enable">
         <value>
           <boolean>true</boolean>
         </value>
       </option>
-      <option name="extensions.10007.options.discover">
+      <option name="extensions.10011.options.disable">
         <value>
           <boolean>false</boolean>
         </value>
       </option>
-      <option name="extensions.10011.options.disable">
+      <option name="extensions.10007.options.discover">
         <value>
           <boolean>false</boolean>
         </value>
@@ -1543,14 +1543,14 @@ send(&quot;notFound&quot;)</text>
     </options>
     <binders>
       <cpnbinder id="ID1524136641"
-                 x="516"
-                 y="173"
-                 width="1106"
+                 x="12"
+                 y="159"
+                 width="944"
                  height="750">
         <sheets>
           <cpnsheet id="ID1524136621"
-                    panx="-456.000000"
-                    pany="295.000000"
+                    panx="-399.000000"
+                    pany="239.000000"
                     zoom="1.000000"
                     instance="ID1524136201">
             <zorder>

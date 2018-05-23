@@ -6,5 +6,5 @@ import translation.lexer.LexerException;
 import translation.lexer.Token;
 
 public interface Lexer {
-	public List<Token> getTokenList() throws TranslationException;
+	public List<Token> getTokenList();
 }

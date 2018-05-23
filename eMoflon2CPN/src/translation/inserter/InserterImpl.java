@@ -35,14 +35,17 @@ public class InserterImpl implements Inserter {
 		this.node = node;
 	}
 	
-	public XmlNode getTree() throws TranslationException, IOException {
-		if(tree == null)
+	public XmlNode getTree() {
+		try {
 			tree = insert();
+		} catch (IOException e) {
+			throw new InserterException(e);
+		}
 		return tree;
 	}
 	
-	private XmlNode insert() throws IOException, TranslationException {
-		String path = "src/resources/cpn/emptycpn.txt";
+	private XmlNode insert() throws IOException {
+		String path = "src/resources/emptynet.cpn";
 		String input = IOHandler.read(new File(path));
 		
 		Lexer lexer = TranslationFactory.getLexer(input);

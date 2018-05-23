@@ -7,8 +7,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.List;
 
 import translation.chooser.ChooserException;
 import translation.chooser.ChooserImpl;
@@ -16,6 +18,7 @@ import translation.generator.GeneratorImpl;
 import translation.lexer.LexerImpl;
 import translation.mapper.MapperImpl;
 import translation.parser.ParserImpl;
+import translation.parser.XmlNode;
 
 /**
  * @author Timo Freitag
@@ -32,6 +35,10 @@ public class Translation {
 	private URLClassLoader classLoader;
 	private DirectoryHandler directoryHandler;
 	private String projectName;
+	private Integer port = null;
+	private File chosenInstance;
+	private XmlNode chosenClassNode = null;
+	private XmlNode chosenMethodNode = null;
 	
 	private static Translation translation;
 	private Translation() {}
@@ -81,24 +88,69 @@ public class Translation {
 		return classLoader;
 	}
 	
-	public void translate(File directory) throws IOException, TranslationException, ChooserException, ClassNotFoundException { //TODO refactor this exception handling
+	public void load(File directory) {
 		directoryHandler = TranslationFactory.getDirectoryHandler(directory);
 		directoryHandler.initialize();
-		String input = IOHandler.read(directoryHandler.getEcore());
+		String input;
+		try {
+			input = IOHandler.read(directoryHandler.getEcore());
+		} catch (IOException e) {
+			throw new TranslationException(e);
+		}
 		lexer = TranslationFactory.getLexer(input);
 		parser = TranslationFactory.getParser(lexer.getTokenList());
+		parser.getXmlTree();
+	}
+	
+	public void translate(Integer port) { //TODO refactor this exception handling
+		if(chosenClassNode == null) 
+			throw new NothingChosenException("No class chosen");
+		
+		if(chosenClassNode == null) 
+			throw new NothingChosenException("No method chosen");
+		
+		this.port = port;
+		
+		try {
+			URL[] urls = new URL[1];
+			urls[0] = directoryHandler.getBin().toURI().toURL();
+			classLoader = new URLClassLoader(urls);
+			chosenClass = classLoader.loadClass(directoryHandler.getFullClassName(chooser.getClassName()));
+			mapper = TranslationFactory.getMapper(chosenMethodNode, port, chosenClass, chooser.getMethodName());
+			inserter = TranslationFactory.getInserter(mapper.getMappedCpnTree());
+			generator = TranslationFactory.getGenerator(inserter.getTree());
+			IOHandler.write(directoryHandler.getCpn(), generator.generateCode());
+		} catch (IOException | ClassNotFoundException e) {
+			throw new TranslationException(e);
+		}
+	}
+	
+	public List<String> getClasses() {
 		chooser = TranslationFactory.getChooser(parser.getXmlTree());
-		System.out.println(chooser.getClasses());
-		URL[] urls = new URL[1];
-		urls[0] = directoryHandler.getBin().toURI().toURL();
-		classLoader = new URLClassLoader(urls);
-		chooser.chooseClass();
-		chosenClass = classLoader.loadClass(directoryHandler.getFullClassName(chooser.getClassName()));
-		System.out.println(chooser.getMethods());
-		mapper = TranslationFactory.getMapper(chooser.chooseMethod(), chosenClass, chooser.getMethodName());
-		inserter = TranslationFactory.getInserter(mapper.getMappedCpnTree());
-		generator = TranslationFactory.getGenerator(inserter.getTree());
-		IOHandler.write(directoryHandler.getCpn(), generator.generateCode());
+		return chooser.getClasses();
+	}
+	
+	public void chooseClass(String chosenClass) {
+		chosenClassNode = chooser.chooseClass(chosenClass);
+	}
+	
+	public List<String> getMethods() {
+		return chooser.getMethods();
+	}
+	
+	public void chooseMethod(String chosenMethod) {
+		chosenMethodNode = chooser.chooseMethod(chosenMethod);
+	}
+	
+	public File getChosenXmiFile() {
+		return chosenInstance;
+	}
 
+	public void chooseInstance(File instance) {
+		chosenInstance = instance;
+	}
+
+	public Integer getPort() {
+		return port;
 	}
 }

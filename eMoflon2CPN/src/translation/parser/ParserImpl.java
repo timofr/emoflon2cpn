@@ -32,27 +32,19 @@ public class ParserImpl implements Parser {
 	}
 	
 	@Override
-	public XmlNode getXmlTree() throws TranslationException {
-
-		try {
-			if(tree == null) {
-				tree = startParsing();
-			}
-		} catch(ParserException e) {
-			e.printStackTrace();
-			throw new TranslationException("The Parser couldn't parse your code.");
-		}
+	public XmlNode getXmlTree() {
+		if(tree == null)
+			tree = startParsing();
+		
 		return tree;
-
 	}
 	
 	/**
 	 * Starts the parsing procedure.
 	 * 
 	 * @return the root of the XmlNode tree
-	 * @throws ParserException
 	 */
-	private XmlNode startParsing() throws ParserException {
+	private XmlNode startParsing() {
 		return handleNode();
 	}
 	
@@ -60,9 +52,8 @@ public class ParserImpl implements Parser {
 	 * Handles a sub-node of the xml tree.
 	 * 
 	 * @return the XmlNode of the subtree
-	 * @throws ParserException
 	 */
-	private XmlNode handleNode() throws ParserException {
+	private XmlNode handleNode() {
 		checkNextTokenType(TokenType.OPENANGLEBRACKETTOKEN);
 		
 		if(isNextTypeEqual(TokenType.SLASHTOKEN)) return null;
@@ -110,7 +101,7 @@ public class ParserImpl implements Parser {
 		return currentToken.equals(token);
 	}
 
-	private boolean isNextTokenEqual(Token token) throws ParserException {
+	private boolean isNextTokenEqual(Token token) {
 		getNextToken();
 		return isTokenEqual(token);
 	}
@@ -119,7 +110,7 @@ public class ParserImpl implements Parser {
 		return currentToken.getType() == type && currentToken.getContent().equals(content);
 	}
 	
-	private boolean isNextTokenEqual(TokenType type, String content) throws ParserException {
+	private boolean isNextTokenEqual(TokenType type, String content) {
 		getNextToken();
 		return isTokenEqual(type, content);
 	}
@@ -128,7 +119,7 @@ public class ParserImpl implements Parser {
 		return currentToken.getType() == type;
 	}
 	
-	private boolean isNextTypeEqual(TokenType type) throws ParserException {
+	private boolean isNextTypeEqual(TokenType type) {
 		getNextToken();
 		return isTypeEqual(type);
 	}
@@ -137,70 +128,70 @@ public class ParserImpl implements Parser {
 		return currentToken.getContent().equals(content);
 	}
 
-	private boolean isNextContentEqual(String content) throws ParserException {
+	private boolean isNextContentEqual(String content) {
 		getNextToken();
 		return isContentEqual(content);
 	}
 	
-	private void checkToken(Token token) throws ParserException {
+	private void checkToken(Token token) {
 		if (!isTokenEqual(token))
 			throwException(token.getContent());
 	}
 
-	private void checkNextToken(Token token) throws ParserException {
+	private void checkNextToken(Token token) {
 		getNextToken();
 		checkToken(token);
 	}
 	
-	private void checkToken(TokenType type, String content) throws ParserException {
+	private void checkToken(TokenType type, String content) {
 		if (!isTokenEqual(type, content))
 			throwException(content);
 	}
 
-	private void checkNextToken(TokenType type, String content) throws ParserException {
+	private void checkNextToken(TokenType type, String content) {
 		getNextToken();
 		checkToken(type, content);
 	}
 	
-	private void checkTokenType(TokenType type) throws ParserException {
+	private void checkTokenType(TokenType type) {
 		if (!isTypeEqual(type))
 			throwException(type.toString());
 	}
 	
-	private void checkNextTokenType(TokenType typeToCheckWith) throws ParserException {
+	private void checkNextTokenType(TokenType typeToCheckWith) {
 		getNextToken();
 		checkTokenType(typeToCheckWith);
 	}
 	
-	private void checkTokenContent(String content) throws ParserException {
+	private void checkTokenContent(String content) {
 		if(!isContentEqual(content))
 			throwException(content);
 	}
 
-	private void checkNextTokenContent(String contentToCheckWith) throws ParserException {
+	private void checkNextTokenContent(String contentToCheckWith) {
 		getNextToken();
 		checkTokenContent(contentToCheckWith);
 	}
 	
-	private void throwException(String expectedString) throws ParserException {
+	private void throwException(String expectedString) {
 		throw new ParserException(
 				"The Parser found " + currentToken.getContent() + " but expected " + expectedString + ".");
 	}
 	
-	private Token getNextToken() throws ParserException {
+	private Token getNextToken() {
 		currentToken = listOfTokens.get(++tokenListIndex);
 		if(!isTypeEqual(TokenType.EOFTOKEN))
 			return currentToken;
 		throw new ParserException("Parser found nothing more. The programm is not complete.");
 	}
 	
-	private Token getCurrentTokenAndGoOn() throws ParserException {
+	private Token getCurrentTokenAndGoOn() {
 		Token tempToken = currentToken;
 		getNextToken();
 		return tempToken;
 	}
 	
-	private Token getLookAheadToken(int n) throws ParserException {
+	private Token getLookAheadToken(int n) {
 		if (tokenListIndex + n < listOfTokens.size() && 0 <= tokenListIndex + n) 
 			return listOfTokens.get(tokenListIndex + n);
 		
