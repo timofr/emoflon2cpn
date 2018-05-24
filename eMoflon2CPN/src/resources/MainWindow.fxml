@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainWindowController">
+<AnchorPane prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainWindowController">
    <children>
-      <HBox prefHeight="300.0" prefWidth="600.0">
+      <HBox prefHeight="350.0" prefWidth="600.0">
          <children>
             <VBox alignment="CENTER" prefHeight="300.0" prefWidth="357.0" spacing="10.0">
                <children>
@@ -54,6 +54,7 @@
                   <Button fx:id="translateButton" mnemonicParsing="false" onAction="#translate" text="Translate" />
                   <Button fx:id="chooseInstanceButton" mnemonicParsing="false" onAction="#chooseInstance" text="Choose Instance" />
                   <Button fx:id="startButton" mnemonicParsing="false" onAction="#start" text="Start" />
+                  <Button fx:id="logButton" mnemonicParsing="false" text="Log" onAction="#log" />
                </children>
             </VBox>
             <TextArea fx:id="console" />

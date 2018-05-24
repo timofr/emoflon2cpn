@@ -48,10 +48,13 @@ public class Simulation {
 		reader.initialize(projectName);
 		xmiFile = translation.getChosenXmiFile();
 		object = reader.load(xmiFile);
-		objects.put("_this", object);
+		objects.put("this", object);
 		methods = Translation.getTranslation().getMapper().getMethods();
 	}
 	
+	public void close() {
+		reader.save(object);
+	}
 	
 	
 	public boolean invoke(String name) throws SimulationException {

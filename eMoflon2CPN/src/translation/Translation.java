@@ -34,7 +34,6 @@ public class Translation {
 	private Class<?> chosenClass;
 	private URLClassLoader classLoader;
 	private DirectoryHandler directoryHandler;
-	private String projectName;
 	private Integer port = null;
 	private File chosenInstance;
 	private XmlNode chosenClassNode = null;
@@ -102,7 +101,7 @@ public class Translation {
 		parser.getXmlTree();
 	}
 	
-	public void translate(Integer port) { //TODO refactor this exception handling
+	public void translate(Integer port) {
 		if(chosenClassNode == null) 
 			throw new NothingChosenException("No class chosen");
 		
@@ -115,7 +114,7 @@ public class Translation {
 			URL[] urls = new URL[1];
 			urls[0] = directoryHandler.getBin().toURI().toURL();
 			classLoader = new URLClassLoader(urls);
-			chosenClass = classLoader.loadClass(directoryHandler.getFullClassName(chooser.getClassName()));
+			chosenClass = classLoader.loadClass(directoryHandler.getFullClassName(chooser.getClassName() + "Impl"));
 			mapper = TranslationFactory.getMapper(chosenMethodNode, port, chosenClass, chooser.getMethodName());
 			inserter = TranslationFactory.getInserter(mapper.getMappedCpnTree());
 			generator = TranslationFactory.getGenerator(inserter.getTree());

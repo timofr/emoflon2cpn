@@ -14,8 +14,10 @@ import java.util.Scanner;
 
 
 public class IOHandler {
+	private IOHandler() {}
+	
 	public static void write(File file, String content) throws IOException {
-		file.getParentFile().mkdir();
+		file.getParentFile().mkdirs();
 		Files.write(file.toPath(), content.getBytes(StandardCharsets.ISO_8859_1));
 	}
 	

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/EmoflonExampleCode/gen" modelPluginID="EmoflonExampleCode"
+    modelName="EmoflonExampleCode" updateClasspath="false" codeFormatting="true" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="8.0" copyrightFields="false" operationReflection="true">
+  <foreignModel>EmoflonExampleCode.ecore</foreignModel>
+  <genPackages prefix="EmoflonExampleCode" disposableProviderFactory="true" ecorePackage="platform:/plugin/EmoflonExampleCode/model/EmoflonExampleCode.ecore#/">
+    <genClasses ecoreClass="platform:/plugin/EmoflonExampleCode/model/EmoflonExampleCode.ecore#//Container">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/plugin/EmoflonExampleCode/model/EmoflonExampleCode.ecore#//Container/counters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/plugin/EmoflonExampleCode/model/EmoflonExampleCode.ecore#//Container/markers"/>
+      <genOperations ecoreOperation="platform:/plugin/EmoflonExampleCode/model/EmoflonExampleCode.ecore#//Container/count"/>
+      <genOperations ecoreOperation="platform:/plugin/EmoflonExampleCode/model/EmoflonExampleCode.ecore#//Container/empty"/>
+    </genClasses>
+    <genClasses ecoreClass="platform:/plugin/EmoflonExampleCode/model/EmoflonExampleCode.ecore#//Marker">
+      <genOperations ecoreOperation="platform:/plugin/EmoflonExampleCode/model/EmoflonExampleCode.ecore#//Marker/nothing"/>
+    </genClasses>
+    <genClasses ecoreClass="platform:/plugin/EmoflonExampleCode/model/EmoflonExampleCode.ecore#//Counter"/>
+    <genClasses ecoreClass="platform:/plugin/EmoflonExampleCode/model/EmoflonExampleCode.ecore#//One"/>
+    <genClasses ecoreClass="platform:/plugin/EmoflonExampleCode/model/EmoflonExampleCode.ecore#//Two"/>
+    <genClasses ecoreClass="platform:/plugin/EmoflonExampleCode/model/EmoflonExampleCode.ecore#//Three"/>
+  </genPackages>
+</genmodel:GenModel>

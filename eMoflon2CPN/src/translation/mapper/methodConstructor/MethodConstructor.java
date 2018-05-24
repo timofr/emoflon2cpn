@@ -66,8 +66,8 @@ public class MethodConstructor {
 			public int compare(String o1, String o2){
 				int i1 = objectNames.indexOf(o1);
 				int i2 = objectNames.indexOf(o2);
-				assert i1 >= 0 : o1 + "not found in ObjectList";
-				assert i2 >= 0 : o2 + "not found in ObjectList";
+				if(i1 < 0) throw new MethodConstructorException(o1 + "not found in ObjectList");
+				if(i2 < 0) throw new MethodConstructorException(o2 + "not found in ObjectList");
 				return Integer.compare(i1, i2);
 			}
 		};
@@ -77,8 +77,8 @@ public class MethodConstructor {
 			public int compare(ObjectWrapper o1, ObjectWrapper o2) {
 				int i1 = objectNames.indexOf(o1.getName());
 				int i2 = objectNames.indexOf(o2.getName());;
-				assert i1 >= 0 : o1.getName() + "not found in ObjectList";
-				assert i2 >= 0 : o2.getName() + "not found in ObjectList";
+				if(i1 < 0) throw new MethodConstructorException(o1.getName() + "not found in ObjectList");
+				if(i2 < 0) throw new MethodConstructorException(o2.getName() + "not found in ObjectList");
 				return Integer.compare(i1, i2);
 			}
 		};
@@ -114,9 +114,6 @@ public class MethodConstructor {
 					redInput.add(new ObjectWrapper(type, name));
 					redOutput.add(name);
 					objectsToDelete.add(name);
-					blackOutput.add(name);
-				}
-				else {
 					if(bindingState != null && bindingState.equals("BOUND")) {
 						blackInput.add(new ObjectWrapper(type, name));
 					}
@@ -150,7 +147,7 @@ public class MethodConstructor {
 		Method greenMethod = null;
 		Method redMethod = null;
 		
-		blackMethod = findMethod(chosenClass, methodNameConstructor.getMethodName(methodName, "black", blackInput, blackOutput));
+		blackMethod = findMethod(chosenClass, methodNameConstructor.getMethodNameWithWildcard(methodName, "black", blackInput, blackOutput));
 		//blackMethod = chosenClass.getMethod(methodNameConstructor.getMethodName(methodName, "black", blackInput, blackOutput), getTypes(blackInput));
 		if(greenOutput.size() > 0)
 			greenMethod = findMethod(chosenClass, methodNameConstructor.getMethodNameWithWildcard(methodName, "green",greenInput, greenOutput));

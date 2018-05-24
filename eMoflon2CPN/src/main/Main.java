@@ -30,6 +30,5 @@ public class Main extends Application {
 		primaryStage.setTitle("eMoflon2Cpn");
 		primaryStage.setScene(scene);
 		primaryStage.show();
-	
 	}
 }

@@ -29,11 +29,12 @@ public class MapperImpl implements Mapper {
 	private List<XmlNode> places = new ArrayList<XmlNode>();
 	private List<XmlNode> trans = new ArrayList<XmlNode>();
 	private List<XmlNode> arcs = new ArrayList<XmlNode>();
-	private Map<XmlNode, String> stopNodes = new HashMap<XmlNode, String>();
+	private List<StopNode> stopNodes = new ArrayList<StopNode>();
 	private XmlNode startNode;
 	private int port;
 	private Map<String, EmoflonMethod> methods = new HashMap<String, EmoflonMethod>();
 	private MethodConstructor methodConstructor;
+	private int disconnectCounter = 1;
 	
 	public MapperImpl(XmlNode emoflonTree, Class<?> chosenClass, String chosenMethod, boolean onlyCpnFile) {
 		this(emoflonTree, 9000, chosenClass, chosenMethod, onlyCpnFile);
@@ -109,11 +110,13 @@ public class MapperImpl implements Mapper {
 		cpnChildren.add(connectTrans);
 		arcs.add(factory.arc("PtoT", 1, getProperty(connectTrans, "id"), getProperty(startPlace, "id"), connectTrans, startPlace, "true"));
 		arcs.add(factory.arc("TtoP", 1, getProperty(connectTrans, "id"), startId, connectTrans, startNode, "true"));
-		for(XmlNode place: stopNodes.keySet()) {
-			String arcGuard = stopNodes.get(place);
+		for(StopNode stopNode: stopNodes) {
+			XmlNode place = stopNode.getNode();
+			String arcGuard = stopNode.getArcGuard();
 			String id = getProperty(place, "id");
-			XmlNode endPlace = factory.place("End", null);
-			XmlNode disconnectTrans = factory.trans(false, "disconnect", "action\ncloseConnection(\"Emoflon2Cpn\")");
+			XmlNode endPlace = factory.place("End" + disconnectCounter, null);
+			XmlNode disconnectTrans = factory.trans(false, "disconnect" + disconnectCounter, "action\ncloseConnection(\"Emoflon2Cpn\")");
+			disconnectCounter++;
 			cpnChildren.add(endPlace);
 			cpnChildren.add(disconnectTrans);
 			arcs.add(factory.arc("TtoP", 1, getProperty(disconnectTrans, "id"), getProperty(endPlace, "id"), disconnectTrans, endPlace, "true"));
@@ -155,7 +158,7 @@ public class MapperImpl implements Mapper {
 				arcs.add(factory.arc("PtoT", 1, targetId, existingPlaceId, targetTrans, existingPlace, arcGuard));
 			}
 			else {
-				stopNodes.put(existingPlace, arcGuard);	
+				stopNodes.add(new StopNode(existingPlace, arcGuard));	
 			}
 			XmlNode child = existingPlace.getChild("text");
 			String currentNamePart = null;
@@ -177,7 +180,7 @@ public class MapperImpl implements Mapper {
 		StringBuilder nameBuilder = new StringBuilder();
 		String currentNamePart = null;
 		nameBuilder.append((currentNamePart = sourceNode.getProperty("name")) == null ? "StartNode" : currentNamePart);
-		nameBuilder.append('2');
+		nameBuilder.append('-');
 		nameBuilder.append((currentNamePart = targetNode.getProperty("name")) == null ? "StopNode" : currentNamePart);
 		XmlNode place = factory.place(nameBuilder.toString(), null);
 		String placeId = getProperty(place, "id");
@@ -189,7 +192,7 @@ public class MapperImpl implements Mapper {
 		if(targetId != null) {
 			arcs.add(factory.arc("PtoT", 1, targetId, placeId, targetTrans, place, arcGuard));
 		} else {
-			stopNodes.put(place, arcGuard);
+			stopNodes.add(new StopNode(place, arcGuard));
 		}
 		return place;
 	}
@@ -220,5 +223,21 @@ public class MapperImpl implements Mapper {
 			return arc.getProperty("orientation").equals("TtoP")? child.getProperty("idref").equals(transId) : false;
 		else
 			return arc.getProperty("orientation").equals("TtoP")? child.getProperty("idref").equals(transId) : false;
+	}
+	
+	private class StopNode {
+		XmlNode node;
+		String arcGuard;
+		
+		public StopNode(XmlNode node, String arcGuard) {
+			this.node = node;
+			this.arcGuard = arcGuard;
+		}
+		public XmlNode getNode() {
+			return node;
+		}
+		public String getArcGuard() {
+			return arcGuard;
+		}
 	}
 }
